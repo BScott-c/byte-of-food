@@ -1,0 +1,9 @@
+DELETE FROM ingredient WHERE recipeId = '2';
+DELETE FROM favorites WHERE recipeId = '2';
+DELETE FROM holds WHERE recipeId = '2';
+DELETE FROM involves WHERE recipeId = '2';
+DELETE FROM equipment WHERE equipmentId = '1';
+DELETE FROM cookbook WHERE userId = '1';
+DELETE FROM recipe WHERE userId = '1';
+DELETE FROM item WHERE itemID = '1';
+DELETE FROM userTable WHERE id = '1';
