@@ -1,0 +1,26 @@
+openapi: "3.0.0"
+info:
+  title: byte-of-food
+  description: An Online Recipe Book App
+  version: 1.0.0
+paths:
+  /user:
+    put:
+    x-controller: path
+    x-operation: 
+    tags:
+     - path
+    summary:
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/...'
+components:
+  parameters:
+  requestBodies:
+  schemas:
+
+# https://github.com/TingeyTime/ITC410/blob/main/openapi.yml
+# https://middleware.openapi-enforcer.com/
