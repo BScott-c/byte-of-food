@@ -4,23 +4,604 @@ info:
   description: An Online Recipe Book App
   version: 1.0.0
 paths:
-  /user:
+  /users:
+    x-controller: user
+    get:
+      x-operation: retreiveUsers
+      summary: Retreive a list of all users (must have admin privileges)
+      tags:
+        - User
+      parameters:
+        - $ref: '#/components/parameters/isAdmin'
+      responses:
+        200:
+          description: A list of all users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userArray'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      x-operation: createUser
+      summary: Create a new user
+      tags:
+        - User
+      requestBody:
+        $ref: '#/components/requestBodies/userInformation'
+      responses:
+        201:
+          description: New user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successfulCreation'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    
+  /users/{user_id}:
+    x-controller: user
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      x-operation: retreiveUser
+      summary: Get a single user's information
+      tags:
+        - User
+      responses:
+        200:
+          description: User Information retreived
+          content:
+            application/json:
+              schema:
+                properties:
+                  bar:
+                    type: string
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
     put:
-    x-controller: path
-    x-operation: 
-    tags:
-     - path
-    summary:
-    requestBody:
+      x-operation: modifyUser
+      summary: Update a single user's information
+      tags:
+        - User
+      requestBody:
+        $ref: '#/components/requestBodies/userInformation'
+      responses:
+        201:
+          description: User Information Updated
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 
+                  Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      x-operation: deleteUser
+      summary: Delete a user
+      tags:
+        - User
+      responses:
+        204:
+          description: User Deleted
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    
+  /cookbooks/{user_id}:
+    x-controller: cookbook
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      x-operation: getUserCookbooks
+      summary: Retreive a list of all cookbooks associated with a user
+      tags:
+        - Cookbook
+      responses:
+        200:
+          description: A list of all cookbooks for a single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cookbookArray'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      x-operation: createCookbook
+      summary: Create a new cookbook
+      tags:
+        - Cookbook
+      requestBody:
+        $ref: '#/components/requestBodies/cookbookInformation'
+      responses:
+        201:
+          description: Cookbook created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successfulCreation'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      x-operation: modifyCookbook
+      summary: Update a cookbook's information
+      tags:
+        - Cookbook
+      requestBody:
+        $ref: '#/components/requestBodies/cookbookInformation'
+      responses:
+        201:
+          description: Cookbook Updated
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 
+                  Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  
+
+  /recipes/{cookbook_id}:
+    x-controller: recipes
+    parameters:
+      - $ref: '#/components/parameters/cookbookId'
+    get:
+      x-operation: getRecipesInCookbook
+      summary: Retreive a list of all recipes associated with a cookbook
+      tags:
+        - Recipe
+      responses:
+        200:
+          description: A list of all cookbooks for a single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recipeArray'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      x-operation: createRecipeInCookbook
+      summary: Create a new recipe in a cookbook
+      tags:
+        - Recipe
+      requestBody:
+        $ref: '#/components/requestBodies/recipe'
+      responses:
+        201:
+          description: Recipe Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successfulCreation'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      x-operation: deleteCookbook
+      summary: Delete a cookbook
+      tags:
+        - Cookbook
+      responses:
+        204:
+          description: Cookbook Deleted
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /recipes/{recipe_id}:
+    x-controller: recipes
+    parameters:
+      - $ref: '#/components/parameters/recipeId'
+    get:
+      x-operation: getRecipeById
+      summary: Retreive information about a single recipe
+      tags:
+        - Recipe
+      responses:
+        200:
+          description: Recipe Information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recipeInformation'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      x-operation: modifyRecipe
+      summary: Update a recipe's information
+      tags:
+        - Recipe
+      requestBody:
+        $ref: '#/components/requestBodies/recipeInformation'
+      responses:
+        201:
+          description: User Information Updated
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 
+                  Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      x-operation: deleteRecipe
+      summary: Delete a recipe
+      tags:
+        - Recipe
+      responses:
+        204:
+          description: Recipe Deleted
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
+  /favorites/{user_id}:
+    x-controller: recipes
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      x-operation: getFavorites
+      summary: Retreive all favorited recipes of a user
+      tags:
+        - Favorite
+      responses:
+        200:
+          description: Recipe Array
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recipeArray'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      x-operation: updateFavorites
+      summary: Retreive all favorited recipes of a user
+      tags:
+        - Favorite
+      parameters:
+        - $ref: '#/components/parameters/recipeIdQuery'
+      responses:
+        201:
+          description: Favorited Recipe Updated
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 
+                  Success
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
+components:
+  parameters:
+    userId:
+      name: user_id
+      in: path
+      description: The id of the user
+      required: true
+      schema:
+        type: string
+        example:
+          "12345"
+    isAdmin:
+      name: isAdmin
+      in: query
+      description: The user id to return if it is admin or not
+      required: false
+      schema:
+        type: string
+    cookbookId:
+      name: cookbook_id
+      in: path
+      description: The id of the cookbook
+      required: true
+      schema:
+        type: string
+        example: 12345
+    recipeId:
+      name: recipe_id
+      in: path
+      description: The id of the recipe
+      required: true
+      schema:
+        type: string
+        example: 12345
+    recipeIdQuery:
+      name: recipe_id
+      in: query
+      description: The id of the recipe
+      required: true
+      schema:
+        type: string
+        example: 12345
+      
+  requestBodies:
+    userId:
+      description: user id
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/...'
-components:
-  parameters:
-  requestBodies:
+            properties:
+              userId: 
+                type: string
+                example: 12345
+    userInformation:
+      description: user information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+    cookbookInformation:
+      description: cookbook information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/cookbook'
+    recipe:
+      description: basic recipe data
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/recipe'
+    recipeInformation:
+      description: recipe information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/recipeInformation'
+  
   schemas:
+    recipe:
+      type: object
+      properties:
+        recipeId:
+          type: string
+          example: 54321
+        recipeName:
+          type: string
+          example: Guacamole
+        recipeDescription:
+          type: string
+          example: A short description goes here
+        isPrivate:
+          type: boolean
+          example: true
+    cookbook:
+      type: object
+      properties:
+        cookbookId:
+          type: string
+          example: 54321
+        cookbookName:
+          type: string
+          example: Yummy Food
+        cookbookDescription:
+          type: string
+          example: A short description goes here
+    user:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 54321
+        userName:
+          type: string
+          example: John Doe
+        isAdmin:
+          type: boolean
+          example: false
+    cookbookArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/cookbook'
+    recipeArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/recipe'
+    recipeInformation:
+      type: object
+      properties:
+        recipeId:
+          type: string
+          example: 54321
+        recipeName:
+          type: string
+          example: Guacamole
+        recipeDescription:
+          type: string
+          example: A short description goes here
+        recipeInstructions:
+          type: string
+          example: do this then that la la la
+        equipment:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Air Fryer
+              description:
+                type: string
+                example: fries food
+        ingredients:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Avocado
+              amount:
+                type: string
+                example: 2
+              measurement:
+                type: string
+                example: cups
+    userArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/user'
+    successfulCreation:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1234567
+  
+  responses:
+    204:
+      description: Deleted
+    401:
+      description: Not authenticated.
+    403:
+      description: Access denied.
+    404:
+      description: Not found.
+    409:
+      description: Bad request.
+    500:
+      description: Server Error.
 
 # https://github.com/TingeyTime/ITC410/blob/main/openapi.yml
 # https://middleware.openapi-enforcer.com/
