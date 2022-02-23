@@ -4,7 +4,8 @@
   "description": "An Online Recipe Book App",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "dev": "node index.js"
   },
   "repository": {
     "type": "git",

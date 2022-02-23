@@ -355,7 +355,7 @@ paths:
           $ref: '#/components/responses/500'
 
   /favorites/{user_id}:
-    x-controller: recipes
+    x-controller: recipe
     parameters:
       - $ref: '#/components/parameters/userId'
     get:
