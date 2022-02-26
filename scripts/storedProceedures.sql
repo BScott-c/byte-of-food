@@ -31,3 +31,10 @@ BEGIN
   RETURN TRUE;
 END;
 $$ LANGUAGE plpgsql;
+
+GRANT EXECUTE ON FUNCTION
+  trigger_set_update_timestamp_recipe(),
+  trigger_set_update_timestamp_cookbook(),
+  togglePrivate(integer),
+  toggleAdmin(integer)
+  TO anonymous;
