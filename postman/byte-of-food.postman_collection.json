@@ -1,3854 +1,501 @@
 {
 	"info": {
-		"_postman_id": "fdaed4b8-8a97-42b3-babb-b19a31291dbe",
+		"_postman_id": "7796c5e3-5c86-4f42-bfc6-874c45bdaf98",
 		"name": "byte-of-food",
 		"description": "An Online Recipe Book App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "users",
+			"name": "UserTable",
 			"item": [
 				{
-					"name": "{user id}",
-					"item": [
-						{
-							"name": "Get a single user's information",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/users/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "User Information retreived",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"bar\": \"nostrud laboris in eu\"\n}"
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Update a single user's information",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"userId\": \"dolor e\",\n  \"userName\": \"John Doe\",\n  \"isAdmin\": false\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/users/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "User Information Updated",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "\"Success\""
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Delete a user",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/users/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "User Deleted",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "\"Success\""
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/users/:user_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"users",
-												":user_id"
-											],
-											"variable": [
-												{
-													"key": "user_id",
-													"value": "12345",
-													"description": "(Required) The id of the user"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "Retreive a list of all users (must have admin privileges)",
+					"name": "Get Users",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users?isAdmin=enim",
+							"raw": "{{context}}/usertable",
 							"host": [
-								"{{baseUrl}}"
+								"{{context}}"
 							],
 							"path": [
-								"users"
+								"usertable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/usertable",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"usertable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/usertable",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"usertable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/usertable?userid={{user_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"usertable"
 							],
 							"query": [
 								{
-									"key": "isAdmin",
-									"value": "enim",
-									"description": "The user id to return if it is admin or not"
+									"key": "userid",
+									"value": "{{user_id}}"
 								}
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "A list of all users",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users?isAdmin=enim",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									],
-									"query": [
-										{
-											"key": "isAdmin",
-											"value": "enim"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "[\n  {\n    \"userId\": \"quis et aliquip\",\n    \"userName\": \"John Doe\",\n    \"isAdmin\": false\n  },\n  {\n    \"userId\": \"anim aute dolor minim\",\n    \"userName\": \"John Doe\",\n    \"isAdmin\": false\n  }\n]"
-						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users?isAdmin=enim",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									],
-									"query": [
-										{
-											"key": "isAdmin",
-											"value": "enim"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users?isAdmin=enim",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									],
-									"query": [
-										{
-											"key": "isAdmin",
-											"value": "enim"
-										}
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Not found.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users?isAdmin=enim",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									],
-									"query": [
-										{
-											"key": "isAdmin",
-											"value": "enim"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users?isAdmin=enim",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									],
-									"query": [
-										{
-											"key": "isAdmin",
-											"value": "enim"
-										}
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users?isAdmin=enim",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									],
-									"query": [
-										{
-											"key": "isAdmin",
-											"value": "enim"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Create a new user",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"userId\": \"dolor e\",\n  \"userName\": \"John Doe\",\n  \"isAdmin\": false\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "New user created",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"id\": \"dolor commodo mollit sed\"\n}"
-						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "cookbooks/{user id}",
+			"name": "Recipe",
 			"item": [
 				{
-					"name": "Retreive a list of all cookbooks associated with a user",
+					"name": "Get Recipes",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cookbooks/:user_id",
+							"raw": "{{context}}/recipe",
 							"host": [
-								"{{baseUrl}}"
+								"{{context}}"
 							],
 							"path": [
-								"cookbooks",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "12345",
-									"description": "(Required) The id of the user"
-								}
+								"recipe"
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "A list of all cookbooks for a single user",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "[\n  {\n    \"cookbookId\": \"culpa id\",\n    \"cookbookName\": \"Yummy Food\",\n    \"cookbookDescription\": \"A short description goes here\"\n  },\n  {\n    \"cookbookId\": \"enim dolor dolore laboris\",\n    \"cookbookName\": \"Yummy Food\",\n    \"cookbookDescription\": \"A short description goes here\"\n  }\n]"
-						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Not found.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
+					"response": []
 				},
 				{
-					"name": "Create a new cookbook",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"cookbookId\": \"pariatur occaecat non\",\n  \"cookbookName\": \"Yummy Food\",\n  \"cookbookDescription\": \"A short description goes here\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/cookbooks/:user_id",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"cookbooks",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "12345",
-									"description": "(Required) The id of the user"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Cookbook created",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"id\": \"dolor commodo mollit sed\"\n}"
-						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Update a cookbook's information",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"cookbookId\": \"pariatur occaecat non\",\n  \"cookbookName\": \"Yummy Food\",\n  \"cookbookDescription\": \"A short description goes here\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/cookbooks/:user_id",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"cookbooks",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "12345",
-									"description": "(Required) The id of the user"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Cookbook Updated",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "\"Success\""
-						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Not found.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/cookbooks/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"cookbooks",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "recipes",
-			"item": [
-				{
-					"name": "{cookbook id}",
-					"item": [
-						{
-							"name": "Retreive a list of all recipes associated with a cookbook",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/recipes/:cookbook_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"recipes",
-										":cookbook_id"
-									],
-									"variable": [
-										{
-											"key": "cookbook_id",
-											"value": "ad qui incididunt nulla aliqua",
-											"description": "(Required) The id of the cookbook"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "A list of all cookbooks for a single user",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "[\n  {\n    \"recipeId\": \"nulla consequat\",\n    \"recipeName\": \"Guacamole\",\n    \"recipeDescription\": \"A short description goes here\",\n    \"isPrivate\": true\n  },\n  {\n    \"recipeId\": \"ullamco ut\",\n    \"recipeName\": \"Guacamole\",\n    \"recipeDescription\": \"A short description goes here\",\n    \"isPrivate\": true\n  }\n]"
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Create a new recipe in a cookbook",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"recipeId\": \"ut irure in\",\n  \"recipeName\": \"Guacamole\",\n  \"recipeDescription\": \"A short description goes here\",\n  \"isPrivate\": true\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/recipes/:cookbook_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"recipes",
-										":cookbook_id"
-									],
-									"variable": [
-										{
-											"key": "cookbook_id",
-											"value": "ad qui incididunt nulla aliqua",
-											"description": "(Required) The id of the cookbook"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Recipe Created",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"id\": \"dolor commodo mollit sed\"\n}"
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Delete a cookbook",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/recipes/:cookbook_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"recipes",
-										":cookbook_id"
-									],
-									"variable": [
-										{
-											"key": "cookbook_id",
-											"value": "ad qui incididunt nulla aliqua",
-											"description": "(Required) The id of the cookbook"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Cookbook Deleted",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "\"Success\""
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:cookbook_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":cookbook_id"
-											],
-											"variable": [
-												{
-													"key": "cookbook_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the cookbook"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "{recipe id}",
-					"item": [
-						{
-							"name": "Retreive information about a single recipe",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/recipes/:recipe_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"recipes",
-										":recipe_id"
-									],
-									"variable": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua",
-											"description": "(Required) The id of the recipe"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Recipe Information",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"recipeId\": \"Ut adipisicing aliquip minim sint\",\n  \"recipeName\": \"Guacamole\",\n  \"recipeDescription\": \"A short description goes here\",\n  \"recipeInstructions\": \"do this then that la la la\",\n  \"equipment\": [\n    {\n      \"name\": \"Air Fryer\",\n      \"description\": \"fries food\"\n    },\n    {\n      \"name\": \"Air Fryer\",\n      \"description\": \"fries food\"\n    }\n  ],\n  \"ingredients\": [\n    {\n      \"name\": \"Avocado\",\n      \"amount\": \"dolore occaecat\",\n      \"measurement\": \"cups\"\n    },\n    {\n      \"name\": \"Avocado\",\n      \"amount\": \"ullamco proident eiusmod\",\n      \"measurement\": \"cups\"\n    }\n  ]\n}"
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Update a recipe's information",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"recipeId\": \"eiusmod exercitation nostrud esse\",\n  \"recipeName\": \"Guacamole\",\n  \"recipeDescription\": \"A short description goes here\",\n  \"recipeInstructions\": \"do this then that la la la\",\n  \"equipment\": [\n    {\n      \"name\": \"Air Fryer\",\n      \"description\": \"fries food\"\n    },\n    {\n      \"name\": \"Air Fryer\",\n      \"description\": \"fries food\"\n    }\n  ],\n  \"ingredients\": [\n    {\n      \"name\": \"Avocado\",\n      \"amount\": \"officia sint\",\n      \"measurement\": \"cups\"\n    },\n    {\n      \"name\": \"Avocado\",\n      \"amount\": \"laborum veniam sed dolore\",\n      \"measurement\": \"cups\"\n    }\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/recipes/:recipe_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"recipes",
-										":recipe_id"
-									],
-									"variable": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua",
-											"description": "(Required) The id of the recipe"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "User Information Updated",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "\"Success\""
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Delete a recipe",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/recipes/:recipe_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"recipes",
-										":recipe_id"
-									],
-									"variable": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua",
-											"description": "(Required) The id of the recipe"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Recipe Deleted",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "\"Success\""
-								},
-								{
-									"name": "Not authenticated.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Access denied.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not found.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Conflict",
-									"code": 409,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Server Error.",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/recipes/:recipe_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"recipes",
-												":recipe_id"
-											],
-											"variable": [
-												{
-													"key": "recipe_id",
-													"value": "ad qui incididunt nulla aliqua",
-													"description": "(Required) The id of the recipe"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "favorites/{user id}",
-			"item": [
-				{
-					"name": "Retreive all favorited recipes of a user",
+					"name": "Get Single Recipe",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/favorites/:user_id",
+							"raw": "{{context}}/recipe?recipeid={{recipe_id}}",
 							"host": [
-								"{{baseUrl}}"
+								"{{context}}"
 							],
 							"path": [
-								"favorites",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "12345",
-									"description": "(Required) The id of the user"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Recipe Array",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "[\n  {\n    \"recipeId\": \"tempor exercitation\",\n    \"recipeName\": \"Guacamole\",\n    \"recipeDescription\": \"A short description goes here\",\n    \"isPrivate\": true\n  },\n  {\n    \"recipeId\": \"incididunt proident aliqua ad\",\n    \"recipeName\": \"Guacamole\",\n    \"recipeDescription\": \"A short description goes here\",\n    \"isPrivate\": true\n  }\n]"
-						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Not found.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Retreive all favorited recipes of a user",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"favorites",
-								":user_id"
+								"recipe"
 							],
 							"query": [
 								{
-									"key": "recipe_id",
-									"value": "ad qui incididunt nulla aliqua",
-									"description": "(Required) The id of the recipe"
-								}
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "12345",
-									"description": "(Required) The id of the user"
+									"key": "recipeid",
+									"value": "{{recipe_id}}"
 								}
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Favorited Recipe Updated",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
+					"response": []
+				},
+				{
+					"name": "Create Recipe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "\"Success\""
+							}
 						},
-						{
-							"name": "Not authenticated.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
+						"url": {
+							"raw": "{{context}}/recipe",
+							"host": [
+								"{{context}}"
 							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Access denied.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Forbidden",
-							"code": 403,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Not found.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Bad request.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Server Error.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/favorites/:user_id?recipe_id=ad qui incididunt nulla aliqua",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"favorites",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "recipe_id",
-											"value": "ad qui incididunt nulla aliqua"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "12345",
-											"description": "(Required) The id of the user"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
+							"path": [
+								"recipe"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Update Recipe",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/recipe",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Recipe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/recipe?recipeid={{user_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"recipe"
+							],
+							"query": [
+								{
+									"key": "recipeid",
+									"value": "{{user_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cookbook",
+			"item": [
+				{
+					"name": "Get Cookbooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/cookbook",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Cookbook",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/cookbook?cookbookid={{cookbook_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbook"
+							],
+							"query": [
+								{
+									"key": "cookbookid",
+									"value": "{{cookbook_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Cookbook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/cookbook",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cookbook",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/cookbook",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cookbook",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/cookbook?cookbookid={{cookbook_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbook"
+							],
+							"query": [
+								{
+									"key": "cookbookid",
+									"value": "{{cookbook_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Equipment",
+			"item": [
+				{
+					"name": "Get Equipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/equipment",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"equipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Equipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/cookbook?equipmentid={{equipment_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbook"
+							],
+							"query": [
+								{
+									"key": "equipmentid",
+									"value": "{{equipment_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Equipment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/equipment",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"equipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Equpment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/equipment",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"equipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Equipment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/equipment?equipmentid={{equipment_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"equipment"
+							],
+							"query": [
+								{
+									"key": "equipmentid",
+									"value": "{{equipment_id}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
