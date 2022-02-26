@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7796c5e3-5c86-4f42-bfc6-874c45bdaf98",
+		"_postman_id": "055fd7a1-864b-415d-b03c-ab9233f7cd25",
 		"name": "byte-of-food",
 		"description": "An Online Recipe Book App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"useremail\": \"thirdTestUser@test.com\",\n    \"userpassword\": \"strongestpassword\",\n    \"userfirstname\": \"Test3\",\n    \"userlastname\": \"User3\",\n    \"isadmin\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -55,11 +55,11 @@
 				{
 					"name": "Update User",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"useremail\": \"thirdTestUser@test.com\",\n    \"userpassword\": \"strongestpassword\",\n    \"userfirstname\": \"Test34\",\n    \"userlastname\": \"User3\",\n    \"isadmin\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,12 +67,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{context}}/usertable",
+							"raw": "{{context}}/usertable?userid=eq.{{user_id}}",
 							"host": [
 								"{{context}}"
 							],
 							"path": [
 								"usertable"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "eq.{{user_id}}"
+								}
 							]
 						}
 					},
@@ -93,7 +99,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{context}}/usertable?userid={{user_id}}",
+							"raw": "{{context}}/usertable?userid=eq.{{user_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -103,7 +109,7 @@
 							"query": [
 								{
 									"key": "userid",
-									"value": "{{user_id}}"
+									"value": "eq.{{user_id}}"
 								}
 							]
 						}
@@ -138,7 +144,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{context}}/recipe?recipeid={{recipe_id}}",
+							"raw": "{{context}}/recipe?recipeid=eq.{{recipe_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -148,7 +154,7 @@
 							"query": [
 								{
 									"key": "recipeid",
-									"value": "{{recipe_id}}"
+									"value": "eq.{{recipe_id}}"
 								}
 							]
 						}
@@ -162,7 +168,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"recipename\": \"Awesome Recipe\",\n    \"recipeinstructions\": \"1. Mix Cheese 2. Poor Cheese 3. Cook Cheese\",\n    \"isprivate\": false,\n    \"recipedescription\": \"short recipe description goes here\",\n    \"userid\": {{user_id}}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -184,11 +190,11 @@
 				{
 					"name": "Update Recipe",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"recipename\": \"Awesome Recipe2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -196,12 +202,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{context}}/recipe",
+							"raw": "{{context}}/recipe?recipeid=eq.{{recipe_id}}",
 							"host": [
 								"{{context}}"
 							],
 							"path": [
 								"recipe"
+							],
+							"query": [
+								{
+									"key": "recipeid",
+									"value": "eq.{{recipe_id}}"
+								}
 							]
 						}
 					},
@@ -212,17 +224,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{context}}/recipe?recipeid={{user_id}}",
+							"raw": "{{context}}/recipe?recipeid=eq.{{user_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -232,7 +235,7 @@
 							"query": [
 								{
 									"key": "recipeid",
-									"value": "{{user_id}}"
+									"value": "eq.{{user_id}}"
 								}
 							]
 						}
@@ -267,7 +270,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{context}}/cookbook?cookbookid={{cookbook_id}}",
+							"raw": "{{context}}/cookbook?cookbookid=eq.{{cookbook_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -277,7 +280,7 @@
 							"query": [
 								{
 									"key": "cookbookid",
-									"value": "{{cookbook_id}}"
+									"value": "eq.{{cookbook_id}}"
 								}
 							]
 						}
@@ -291,7 +294,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"cookbookname\": \"Awesome Cookbook 2\",\n    \"cookbookdescription\": \"some short description for a cookbook\",\n    \"userid\": {{user_id}}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -313,11 +316,11 @@
 				{
 					"name": "Update Cookbook",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"cookbookname\": \"Awesome Cookbook 4\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,12 +328,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{context}}/cookbook",
+							"raw": "{{context}}/cookbook?cookbookid=eq.{{cookbook_id}}",
 							"host": [
 								"{{context}}"
 							],
 							"path": [
 								"cookbook"
+							],
+							"query": [
+								{
+									"key": "cookbookid",
+									"value": "eq.{{cookbook_id}}"
+								}
 							]
 						}
 					},
@@ -341,17 +350,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{context}}/cookbook?cookbookid={{cookbook_id}}",
+							"raw": "{{context}}/cookbook?cookbookid=eq.{{cookbook_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -361,7 +361,7 @@
 							"query": [
 								{
 									"key": "cookbookid",
-									"value": "{{cookbook_id}}"
+									"value": "eq.{{cookbook_id}}"
 								}
 							]
 						}
@@ -396,7 +396,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{context}}/cookbook?equipmentid={{equipment_id}}",
+							"raw": "{{context}}/cookbook?equipmentid=eq.{{equipment_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -406,7 +406,7 @@
 							"query": [
 								{
 									"key": "equipmentid",
-									"value": "{{equipment_id}}"
+									"value": "eq.{{equipment_id}}"
 								}
 							]
 						}
@@ -420,7 +420,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"equipmentname\": \"Instant Pot\",\n    \"equipmentdescription\": \"my best friend in the kitchen\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -442,11 +442,11 @@
 				{
 					"name": "Modify Equpment",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n}",
+							"raw": "{\n    \"equipmentname\": \"air fryer\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -454,12 +454,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{context}}/equipment",
+							"raw": "{{context}}/equipment?equipmentid=eq.{{equipment_id}}",
 							"host": [
 								"{{context}}"
 							],
 							"path": [
 								"equipment"
+							],
+							"query": [
+								{
+									"key": "equipmentid",
+									"value": "eq.{{equipment_id}}"
+								}
 							]
 						}
 					},
@@ -470,17 +476,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{context}}/equipment?equipmentid={{equipment_id}}",
+							"raw": "{{context}}/equipment?equipmentid=eq.{{equipment_id}}",
 							"host": [
 								"{{context}}"
 							],
@@ -490,7 +487,7 @@
 							"query": [
 								{
 									"key": "equipmentid",
-									"value": "{{equipment_id}}"
+									"value": "eq.{{equipment_id}}"
 								}
 							]
 						}
@@ -498,6 +495,542 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Get Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/item",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/item?itemid=eq.{{item_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "itemid",
+									"value": "eq.{{item_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemname\": \"Banana\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/item",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Item",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemname\": \"pineapple\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/item?itemid=eq.{{item_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "itemid",
+									"value": "eq.{{item_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/item?itemid=eq.{{item_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "itemid",
+									"value": "eq.{{item_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredient",
+			"item": [
+				{
+					"name": "Get Ingredients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/ingredient",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Ingredient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/ingredient?ingredientid=eq.{{Ingredient_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "ingredientid",
+									"value": "eq.{{Ingredient_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Ingredient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredientAmount\": 2,\n    \"ingredientMeasurement\": \"cups\",\n    \"itemid\": {{item_id}},\n    \"recipeid\": {{recipe_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/ingredient",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Ingredient",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredientAmount\": 24\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/ingredient?ingredientid=eq.{{Ingredient_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "ingredientid",
+									"value": "eq.{{Ingredient_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ingredient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/ingredient?ingredientid=eq.{{ingredient_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "ingredientid",
+									"value": "eq.{{ingredient_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Views",
+			"item": [
+				{
+					"name": "UserCookbooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/usercookbooks",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"usercookbooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CookbookRecipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/cookbookrecipes",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"cookbookrecipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/recipes",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RecipeEquipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/recipeequipment",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"recipeequipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RecipeIngredients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/recipeingredients",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"recipeingredients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FavoriteRecipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/favoriterecipes",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"favoriterecipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AdminPage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/adminpage",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"adminpage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AdminStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/adminstatus",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"adminstatus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Functions",
+			"item": [
+				{
+					"name": "ToggleAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{user_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/rpc/toggleadmin",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"rpc",
+								"toggleadmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TogglePrivate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{recipe_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/rpc/toggleprivate",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"rpc",
+								"toggleprivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test456@test.com\",\n    \"password\": \"pleasework\",\n    \"firstname\": \"John\",\n    \"lastname\": \"Doe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/rpc/signup",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"rpc",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"firstUser@test.com\",\n    \"password\": \"strongpassword\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/rpc/login",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"rpc",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
