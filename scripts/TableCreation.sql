@@ -5,7 +5,7 @@ CREATE TABLE userTable
   userFirstName VARCHAR(1024) NOT NULL,
   userLastName VARCHAR(1024) NOT NULL,
   userId SERIAL NOT NULL,
-  isAdmin INT NOT NULL,
+  isAdmin BOOLEAN NOT NULL,
   PRIMARY KEY (userId),
   UNIQUE (userEmail)
 );
@@ -15,7 +15,7 @@ CREATE TABLE Recipe
   recipeId SERIAL NOT NULL,
   recipeName VARCHAR(1024) NOT NULL,
   recipeInstructions VARCHAR(1024) NOT NULL,
-  isPrivate INT NOT NULL,
+  isPrivate BOOLEAN NOT NULL,
   recipeDescription VARCHAR(1024),
   recipeUpdatedDate DATE NOT NULL,
   userId INT NOT NULL,
