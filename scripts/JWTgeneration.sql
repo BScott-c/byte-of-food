@@ -44,7 +44,7 @@ $$;
 --
 
 CREATE OR REPLACE FUNCTION
-signup(email TEXT, password TEXT, firstName TEXT, lastName TEXT) RETURNS VOID
+signup(email TEXT, firstName TEXT, lastName TEXT, password TEXT) RETURNS VOID
 AS $$
   INSERT INTO userTable (userEmail, userPassword, userFirstName, userLastName, isAdmin) VALUES
     (signup.email, signup.password, signup.firstName, signup.lastName, 'FALSE');
@@ -83,5 +83,5 @@ $$;
 GRANT EXECUTE ON FUNCTION
   login(text,text),
   signup(text, text, text, text)
-  TO anonymous;
+  TO PUBLIC;
 

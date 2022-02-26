@@ -1,0 +1,69 @@
+# Update date for recipe editing
+
+This trigger automatically updates the respectful recipe row to its last updated time and date.
+
+CREATE OR REPLACE FUNCTION trigger_set_update_timestamp_recipe()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.recipeUpdatedDate = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_insert_timestamp_recipe
+BEFORE INSERT ON recipe
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_update_timestamp_recipe();
+
+CREATE TRIGGER set_update_timestamp_recipe
+BEFORE UPDATE ON recipe
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_update_timestamp_recipe();
+
+# Update date for cookbook editing
+
+This trigger automatically updates the respectful cookbook row to its last updated time and date.
+
+CREATE OR REPLACE FUNCTION trigger_set_update_timestamp_cookbook()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.cookbookUpdatedDate = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_insert_timestamp_cookbook
+BEFORE INSERT ON cookbook
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_update_timestamp_cookbook();
+
+CREATE TRIGGER set_update_timestamp_cookbook
+BEFORE UPDATE ON cookbook
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_update_timestamp_cookbook();
+
+# Toggle recipe private status
+
+This trigger updates the database on whether the user would like the recipe to be public or private.
+
+-- pass in recipeId as id 
+CREATE OR REPLACE FUNCTION togglePrivate(id integer)
+RETURNS BOOLEAN AS $$
+BEGIN
+  UPDATE recipe SET isPrivate = NOT isPrivate WHERE recipeId = id;
+  RETURN TRUE;
+END;
+$$ LANGUAGE plpgsql;
+
+# Admin status toggle
+
+This trigger toggles a users status as admin or not admin
+
+-- pass in userId as id
+CREATE OR REPLACE FUNCTION toggleAdmin(id integer)
+RETURNS BOOLEAN AS $$
+BEGIN
+  UPDATE userTable SET isAdmin = NOT isAdmin WHERE userId = id;
+  RETURN TRUE;
+END;
+$$ LANGUAGE plpgsql;
