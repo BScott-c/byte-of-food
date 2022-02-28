@@ -85,3 +85,17 @@ GRANT EXECUTE ON FUNCTION
   signup(text, text, text, text)
   TO PUBLIC;
 
+--
+
+ALTER TABLE cookbook ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS cookbook_policy ON cookbook;
+CREATE POLICY cookbook_policy ON cookbook
+    USING (TRUE) --- read policy (allow everyone to select articles)
+    WITH CHECK (userid = current_setting('request.jwt.claim.user_id')::INTEGER); --- write policy (only allow users with author_id same as the one in the row to edit it)
+
+ALTER TABLE recipe ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS recipe_policy ON recipe;
+CREATE POLICY recipe_policy ON recipe
+    USING (TRUE) --- read policy (allow everyone to select articles)
+    WITH CHECK (userid = current_setting('request.jwt.claim.user_id')::INTEGER); --- write policy (only allow users with author_id same as the one in the row to edit it)
+
