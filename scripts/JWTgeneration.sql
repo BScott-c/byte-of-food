@@ -47,7 +47,7 @@ CREATE OR REPLACE FUNCTION
 signup(email TEXT, firstName TEXT, lastName TEXT, password TEXT) RETURNS VOID
 AS $$
   INSERT INTO userTable (userEmail, userPassword, userFirstName, userLastName, isAdmin) VALUES
-    (signup.email, signup.password, signup.firstName, signup.lastName, 'FALSE');
+    (signup.email, crypt(signup.password, gen_salt('bf', 8)), signup.firstName, signup.lastName, 'FALSE');
 $$ LANGUAGE sql SECURITY DEFINER;
 
 --
@@ -60,7 +60,7 @@ DECLARE
   _role NAME;
   result jwt_token;
 BEGIN
-  SELECT userTable.userId FROM userTable WHERE userTable.userEmail=login.email AND userTable.userPassword=login.password INTO _role;
+  SELECT userTable.userId FROM userTable WHERE userTable.userEmail=login.email AND userTable.userPassword=crypt(login.password, userTable.userPassword) INTO _role;
   IF _role IS NULL THEN
     RAISE invalid_password USING message = 'invalid user or password';
   END IF;
