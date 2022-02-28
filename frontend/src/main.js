@@ -8,7 +8,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
-import Article from "./pages/Article";
+import Cookbooks from "./pages/Cookbooks";
 import AdminArticleAdd from "./components/AdminArticleAdd";
 import AdminArticleList from "./components/AdminArticleList";
 import AdminArticleEdit from "./components/AdminArticleEdit";
@@ -39,7 +39,11 @@ const checkAuth = function(to, _, next) {
 const router = new VueRouter({
   routes: [
     { path: "/", component: Home },
-    { path: "/article/:id", component: Article },
+    { path: "/cookbooks/:userid", component: Cookbooks }, // get all cookbooks for user
+    // { path: "/cookbook/:cookbookid", component: Cookbook }, // get all recipes in a cookbook
+    // { path: "/recipes/:userid", component: Recipe }, // get all recipes for user
+    // { path: "/recipe/:recipeid", component: Cookbook }, // get a single recipe
+    // { path: "/favoriteRecipes/:userid", component: Cookbook }, // get all favorite recipe
     { path: "/login", component: Login },
     { path: "/logout", component: Logout },
     { path: "/register", component: Register },

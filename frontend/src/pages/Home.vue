@@ -4,10 +4,10 @@
       <p>Welcome to the IT350 blog!</p>
     </b-jumbotron>
     <br />
-    <div v-if="loading">Loading articles....</div>
+    <div v-if="loading">Loading cookbooks....</div>
     <ul v-else>
-      <li v-for="article in articles" :key="article.articleid">
-        <router-link :to="`article/${article.articleid}`">{{
+      <li v-for="cookbook in cookbooks" :key="cookbook.cookbookid">
+        <router-link :to="`cookbook/${cookbook.cookbookid}`">{{
           article.title
         }}</router-link>
       </li>
@@ -23,12 +23,12 @@ export default {
   data: function () {
     return {
       loading: false,
-      articles: [],
+      cookbooks: [],
     };
   },
   created: function () {
     this.loading = true;
-    Api.getArticles().then((res) => {
+    Api.getCookbooks(this.$route.params.id).then((res) => {
       this.articles = res.data;
       this.loading = false;
     });
