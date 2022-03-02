@@ -17,6 +17,7 @@
 
 <script>
 import Api from "../api";
+import { getJwtToken, getUserIdFromToken } from '../auth';
 
 export default {
   name: "Home",
@@ -28,7 +29,9 @@ export default {
   },
   created: function () {
     this.loading = true;
-    Api.getCookbooks(this.$route.params.id).then((res) => {
+    console.log(this.$route)
+    const userId = getUserIdFromToken(getJwtToken())
+    Api.getCookbooks(userId).then((res) => {
       this.articles = res.data;
       this.loading = false;
     });

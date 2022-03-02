@@ -2,7 +2,8 @@ import axios from "axios";
 import { authHeader, getJwtToken, getUserIdFromToken } from "./auth";
 
 
-const API_URL = `${process.env.BASE_API}`;
+//const API_URL = `${process.env.BASE_API}`;
+const API_URL = 'http://184.169.184.185:8000';
 
 class Api {
   getCookbooks(userid) {
@@ -47,8 +48,8 @@ class Api {
     return axios.post(API_URL + "/rpc/login", { email, password });
   }
 
-  signup(email, password, name) {
-    return axios.post(API_URL + "/rpc/signup", { email, password, name });
+  signup(email, firstname, lastname, password) {
+    return axios.post(API_URL + "/rpc/signup", { email, firstname, lastname, password });
   }
 }
 

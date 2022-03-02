@@ -9,12 +9,21 @@
       <form name="form" @submit.prevent="handleRegister">
         <div>
           <div class="form-group">
-            <label for="username">Name</label>
+            <label for="userfirstname">First Name</label>
             <input
-              v-model="name"
+              v-model="firstName"
               type="text"
               class="form-control"
-              name="name"
+              firstName="firstName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="userlastname">Last Name</label>
+            <input
+              v-model="lastName"
+              type="text"
+              class="form-control"
+              lastName="lastName"
             />
           </div>
           <div class="form-group">
@@ -36,7 +45,7 @@
             />
           </div>
           <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
+            <button class="btn btn-primary btn-block" @click="handleRegister()" :disabled="loading">
               <span
                 v-show="loading"
                 class="spinner-border spinner-border-sm"
@@ -46,6 +55,18 @@
           </div>
         </div>
       </form>
+      <br>
+      <br>
+      <div >
+        <span>Already have an account?</span>
+        <button class="btn btn-primary btn-block" @click="goToLogin()" :disabled="loading">
+          <span
+            v-show="loading"
+            class="spinner-border spinner-border-sm"
+          ></span>
+          <span>Login</span>
+        </button>
+      </div>
 
       <div v-if="message" class="alert alert-danger">
         {{ message }}
@@ -60,7 +81,8 @@ export default {
   name: "Register",
   data() {
     return {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       loading: false,
@@ -72,8 +94,9 @@ export default {
       this.message = "";
       this.loading = true;
 
-      Api.signup(this.email, this.password, this.name)
+      Api.signup(this.email, this.firstName, this.lastName, this.password)
         .then(() => {
+          console.info('Signed UP without errors and going to login page')
           this.$router.push("/login");
         })
         .catch((error) => {
@@ -83,6 +106,9 @@ export default {
           }
           this.loading = false;
         });
+    },
+    goToLogin() {
+      this.$router.push('/login')
     },
   },
 };

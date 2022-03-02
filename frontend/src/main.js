@@ -25,6 +25,7 @@ Vue.use(VueRouter);
 
 const checkAuth = function(to, _, next) {
   const token = getJwtToken();
+  console.log('CHECK AUTH TOKEN: ', token)
   if (token === undefined || token === "undefined" || token === null) {
     // redirect to login because we don't have token yet
     next({
@@ -38,7 +39,10 @@ const checkAuth = function(to, _, next) {
 
 const router = new VueRouter({
   routes: [
-    { path: "/", component: Home },
+    {  
+      path: "/", component: Home,
+      beforeEnter: checkAuth
+   },
     { path: "/cookbooks/:userid", component: Cookbooks }, // get all cookbooks for user
     // { path: "/cookbook/:cookbookid", component: Cookbook }, // get all recipes in a cookbook
     // { path: "/recipes/:userid", component: Recipe }, // get all recipes for user
