@@ -1,9 +1,12 @@
 <template>
   <div>
-    <div v-if="loading">Loading article....</div>
+    <div v-if="loading">Loading cookbooks....</div>
     <div v-else>
-      <h1>{{ article.title }}</h1>
-      <p>{{ article.content }}</p>
+      <v-for>
+
+      </v-for>
+      <h1>{{ cookbook.title }}</h1>
+      <p>{{ cookbook.content }}</p>
     </div>
   </div>
 </template>
@@ -21,7 +24,8 @@ export default {
   },
   created: function () {
     this.loading = true;
-    Api.getArticleDetail(this.$route.params.id).then((res) => {
+    console.log(this.$route)
+    Api.getSingleCookbook(2).then((res) => {
       this.article = res.data[0];
       this.loading = false;
     });

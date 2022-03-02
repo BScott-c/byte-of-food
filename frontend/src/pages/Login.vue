@@ -26,12 +26,24 @@
           />
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" :disabled="loading">
+          <button class="btn btn-primary btn-block" @click="handleLogin()" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
             ></span>
             <span>Login</span>
+          </button>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+          <span>Don't have an account?</span>
+          <button class="btn btn-primary btn-block" @click="goToRegister()" :disabled="loading">
+            <span
+              v-show="loading"
+              class="spinner-border spinner-border-sm"
+            ></span>
+            <span>Register</span>
           </button>
         </div>
         <div class="form-group">
@@ -61,14 +73,14 @@ export default {
   methods: {
     handleLogin() {
       this.loading = true;
-      this.message = "";
+      this.message = "Loading Login....";
       Api.login(this.email, this.password)
         .then((res) => {
           setJwtToken(res.data[0].token);
           if (this.$route.params.nextUrl != null) {
             this.$router.push(this.$route.params.nextUrl);
           } else {
-            this.$router.push("/admin");
+            this.$router.push("/");
           }
         })
         .catch((error) => {
@@ -79,8 +91,12 @@ export default {
           this.loading = false;
         });
     },
+    goToRegister() {
+      this.$router.push('/register')
+    },
   },
 };
+
 </script>
 
 <style scoped>
