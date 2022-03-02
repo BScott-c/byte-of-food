@@ -6,7 +6,11 @@ import { authHeader, getJwtToken, getUserIdFromToken } from "./auth";
 const API_URL = 'http://184.169.184.185:8000';
 
 class Api {
-  getCookbooks(userid) {
+  getCookbooks() {
+    return axios.get(API_URL + `/usercookbooks`, {});
+  }
+
+  getCookbooksForUser(userid) {
     return axios.get(API_URL + `/usercookbooks?userid=eq.${userid}`, {});
   }
 
@@ -36,6 +40,10 @@ class Api {
         headers: authHeader(),
       }
     );
+  }
+
+  getRecipesInCookbook(cookbookid) {
+    return axios.get(API_URL + `/cookbookrecipes?cookbookid=eq.${cookbookid}`, {});
   }
 
   // deleteArticle(id) {

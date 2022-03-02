@@ -8,7 +8,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
-import Cookbooks from "./pages/Cookbooks";
+import Cookbook from "./pages/Cookbook";
 import AppBar from "./components/AppBar.vue"
 import AdminArticleAdd from "./components/AdminArticleAdd";
 import AdminArticleList from "./components/AdminArticleList";
@@ -44,8 +44,8 @@ const router = new VueRouter({
       path: "/", component: Home,
       beforeEnter: checkAuth
    },
-    { path: "/cookbooks/:userid", component: Cookbooks }, // get all cookbooks for user
-    // { path: "/cookbook/:cookbookid", component: Cookbook }, // get all recipes in a cookbook
+    //{ path: "/cookbooks/:userid", component: Cookbooks }, // get all cookbooks for user
+    { path: "/cookbook/:cookbookid", component: Cookbook }, // get all recipes in a cookbook
     // { path: "/recipes/:userid", component: Recipe }, // get all recipes for user
     // { path: "/recipe/:recipeid", component: Cookbook }, // get a single recipe
     // { path: "/favoriteRecipes/:userid", component: Cookbook }, // get all favorite recipe

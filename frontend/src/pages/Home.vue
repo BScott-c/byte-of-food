@@ -1,26 +1,26 @@
 <template>
   <div>
     <b-jumbotron>
-      <p>Welcome to the IT350 blog!</p>
+      <p>Welcome to Byte of Food!</p>
     </b-jumbotron>
+    
     <br />
     <div v-if="loading">Loading cookbooks....</div>
     <ul v-else>
-      <li v-for="cookbook in cookbooks" :key="cookbook.cookbookid">
-        <router-link :to="`cookbook/${cookbook.cookbookid}`">{{
-          article.title
-        }}</router-link>
-      </li>
+      <CookbookList/>
     </ul>
   </div>
 </template>
 
 <script>
 import Api from "../api";
-import { getJwtToken, getUserIdFromToken } from '../auth';
+import CookbookList from "../components/CookbookList.vue"
 
 export default {
   name: "Home",
+  components: {
+    CookbookList
+  },
   data: function () {
     return {
       loading: false,
@@ -29,10 +29,8 @@ export default {
   },
   created: function () {
     this.loading = true;
-    console.log(this.$route)
-    const userId = getUserIdFromToken(getJwtToken())
-    Api.getCookbooks(userId).then((res) => {
-      this.articles = res.data;
+    Api.getCookbooks().then((res) => {
+      this.cookbooks = res.data;
       this.loading = false;
     });
   },
