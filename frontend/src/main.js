@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Cookbooks from "./pages/Cookbooks";
+import AppBar from "./components/AppBar.vue"
 import AdminArticleAdd from "./components/AdminArticleAdd";
 import AdminArticleList from "./components/AdminArticleList";
 import AdminArticleEdit from "./components/AdminArticleEdit";
@@ -59,6 +60,7 @@ const router = new VueRouter({
         { path: "add", component: AdminArticleAdd },
         { path: "edit/:id", component: AdminArticleEdit },
         { path: "", component: AdminArticleList },
+        { path: "", component: AppBar}
       ],
     },
   ],
