@@ -9,10 +9,20 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Cookbook from "./pages/Cookbook";
+import AllCookbooks from "./pages/AllCookbooks"
+import CreateCookbook from "./pages/CreateCookbook"
+import CreateRecipe from "./pages/CreateRecipe"
+import AddRecipeToCookbook from "./pages/AddRecipeToCookbook"
 import AppBar from "./components/AppBar.vue"
 import AdminArticleAdd from "./components/AdminArticleAdd";
 import AdminArticleList from "./components/AdminArticleList";
 import AdminArticleEdit from "./components/AdminArticleEdit";
+
+import DefaultLayout from './layouts/Default.vue';
+import PlainLayout from './layouts/Plain.vue';
+
+Vue.component('default-layout', DefaultLayout);
+Vue.component('plain-layout', PlainLayout);
 
 Vue.config.productionTip = false;
 
@@ -41,21 +51,53 @@ const checkAuth = function(to, _, next) {
 const router = new VueRouter({
   routes: [
     {  
-      path: "/", component: Home,
+      path: "/", // Shows User's Cookbooks
+      component: Home,
       beforeEnter: checkAuth
    },
-    //{ path: "/cookbooks/:userid", component: Cookbooks }, // get all cookbooks for user
-    { path: "/cookbook/:cookbookid", component: Cookbook }, // get all recipes in a cookbook
+   {  
+    path: "/cookbook/create", 
+    component: CreateCookbook,
+    beforeEnter: checkAuth
+    },
+    {  
+      path: "/recipe/create/:cookbookid?", 
+      component: CreateRecipe,
+      beforeEnter: checkAuth
+      },
+    {  
+      path: "/addRecipe/:cookbookid/:cookbookname", 
+      component: AddRecipeToCookbook,
+      beforeEnter: checkAuth
+      },
+    { 
+      path: "/usercookbooks/:userid", 
+      component: AllCookbooks,
+      beforeEnter: checkAuth
+    }, // get all cookbooks for user
+    { 
+      path: "/cookbook/:cookbookid",
+      name: "Cookbook",
+      component: Cookbook,
+      beforeEnter: checkAuth
+    }, // get all recipes in a cookbook
     // { path: "/recipes/:userid", component: Recipe }, // get all recipes for user
     // { path: "/recipe/:recipeid", component: Cookbook }, // get a single recipe
     // { path: "/favoriteRecipes/:userid", component: Cookbook }, // get all favorite recipe
-    { path: "/login", component: Login },
-    { path: "/logout", component: Logout },
+    {
+      path: "/login",
+      component: Login,
+      meta: { layout: "plain-layout" }
+    },
+    {
+      path: "/logout",
+      component: Logout,
+      meta: { layout: "plain-layout" }
+    },
     { path: "/register", component: Register },
     {
       path: "/admin",
       component: Admin,
-      beforeEnter: checkAuth,
       children: [
         { path: "add", component: AdminArticleAdd },
         { path: "edit/:id", component: AdminArticleEdit },

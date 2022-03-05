@@ -1,30 +1,31 @@
 import axios from "axios";
-import { authHeader, getJwtToken, getUserIdFromToken } from "./auth";
+import { authHeader } from "./auth";
 
 
 //const API_URL = `${process.env.BASE_API}`;
 const API_URL = 'http://184.169.184.185:8000';
 
 class Api {
+  // COOKBOOK ACTIONS
   getCookbooks() {
     return axios.get(API_URL + `/usercookbooks`, {});
-  }
-
-  getCookbooksForUser(userid) {
-    return axios.get(API_URL + `/usercookbooks?userid=eq.${userid}`, {});
   }
 
   getSingleCookbook(id) {
     return axios.get(API_URL + `/cookbook?cookbookid=eq.${id}`);
   }
 
-  addCookbook(cookbook) {
+  getCookbooksForUser(userid) {
+    return axios.get(API_URL + `/usercookbooks?userid=eq.${userid}`, {});
+  }
+
+  addCookbook(cookbookName, cookbookDescription, userId) {
     return axios.post(
       API_URL + "/cookbook",
       {
-        ...cookbook,
-        // add user id from JWT token
-        userid: getUserIdFromToken(getJwtToken()),
+        cookbookname: cookbookName,
+        cookbookdescription: cookbookDescription,
+        userid: userId
       },
       {
         headers: authHeader(),
@@ -42,9 +43,65 @@ class Api {
     );
   }
 
+  deleteCookbook(cookbookId) {
+    return axios.delete(
+      API_URL + `/cookbook?cookbookId=eq.${cookbookId}`,
+      {},
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  // RECIPE ACTIONS
   getRecipesInCookbook(cookbookid) {
     return axios.get(API_URL + `/cookbookrecipes?cookbookid=eq.${cookbookid}`, {});
   }
+
+  async getRecipesNotInCookbook(cookbookid) {
+    let allRecipesNotInCookbook = []
+    const first = await axios.get(API_URL + `/cookbookrecipes?cookbookid!=eq.${cookbookid}`, {});
+    const second = await axios.get(API_URL + `/cookbookrecipes?cookbookid`, {});
+    console.log('1: ', first)
+    console.log('2:', second)
+    return allRecipesNotInCookbook
+  }
+
+  createRecipe(recipeName, recipeDescription, recipeInstructions, isPrivate, userId) {
+    return axios.post(
+      API_URL + `/recipe`,
+      {
+        recipename: recipeName,
+        recipedescription: recipeDescription,
+        recipeinstructions: recipeInstructions,
+        isprivate: isPrivate,
+        userid: userId
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  addRecipeToCookbook(cookbookId, recipeId){
+    return axios.post(API_URL + `/holds`, 
+    {
+      cookbookid: cookbookId,
+      recipeid: recipeId
+    },
+    {
+      headers: authHeader(),
+    });
+  }
+
+  removeRecipeFromCookbook(cookbookId, recipeId){
+    return axios.delete(API_URL + `/holds?cookbookid=eq.${cookbookId}&recipeid=eq${recipeId}`, 
+    {},
+    {
+      headers: authHeader(),
+    });
+  }
+
 
   // deleteArticle(id) {
   //   return axios.delete(API_URL + `/articles?articleid=eq.${id}`, {

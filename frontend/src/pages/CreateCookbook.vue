@@ -1,74 +1,38 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <h1>Byte Of Food</h1>
+      <h1>Create a Cookbook</h1>
       <form name="form" @submit.prevent="handleRegister">
         <div>
           <div class="form-group">
-            <label for="userfirstname">First Name</label>
+            <label for="cookbookName">Cookbook Name</label>
             <input
-              v-model="firstName"
+              v-model="cookbookName"
               type="text"
               class="form-control"
-              firstName="firstName"
+              cookbookName="cookbookName"
             />
           </div>
           <div class="form-group">
-            <label for="userlastname">Last Name</label>
+            <label for="cookbookDescription">Cookbook Description</label>
             <input
-              v-model="lastName"
+              v-model="cookbookDescription"
               type="text"
               class="form-control"
-              lastName="lastName"
+              cookbookDescription="cookbookDescription"
             />
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              v-model="email"
-              type="email"
-              class="form-control"
-              name="email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              v-model="password"
-              type="password"
-              class="form-control"
-              name="password"
-            />
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary btn-block" @click="handleRegister()" :disabled="loading">
+            <button class="btn btn-primary btn-block" @click="handleCreate()" :disabled="loading">
               <span
                 v-show="loading"
                 class="spinner-border spinner-border-sm"
               ></span>
-              <span>Sign Up</span>
+              <span>Create</span>
             </button>
           </div>
         </div>
-      </form>
-      <br>
-      <br>
-      <div >
-        <span>Already have an account?</span>
-        <button class="btn btn-primary btn-block" @click="goToLogin()" :disabled="loading">
-          <span
-            v-show="loading"
-            class="spinner-border spinner-border-sm"
-          ></span>
-          <span>Login</span>
-        </button>
-      </div>
-
+      </form>      
       <div v-if="message" class="alert alert-danger">
         {{ message }}
       </div>
@@ -78,27 +42,27 @@
 
 <script>
 import Api from "../api";
+import { getJwtToken, getUserIdFromToken } from '../auth';
+
 export default {
-  name: "Register",
+  name: "CreateCookbook",
   data() {
     return {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
+      cookbookName: "",
+      cookbookDescription: "",
       loading: false,
       message: "",
     };
   },
   methods: {
-    handleRegister() {
+    handleCreate() {
       this.message = "";
       this.loading = true;
-
-      Api.signup(this.email, this.firstName, this.lastName, this.password)
+      const userId = getUserIdFromToken(getJwtToken())
+      Api.addCookbook(this.cookbookName, this.cookbookDescription, userId)
         .then(() => {
-          console.info('Signed UP without errors and going to login page')
-          this.$router.push("/login");
+          console.info('Created cookbook without errors and going to user cookbook page')
+          this.$router.push(`/`);
         })
         .catch((error) => {
           console.log(error);
@@ -107,10 +71,7 @@ export default {
           }
           this.loading = false;
         });
-    },
-    goToLogin() {
-      this.$router.push('/login')
-    },
+    }
   },
 };
 </script>

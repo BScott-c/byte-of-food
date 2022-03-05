@@ -1,39 +1,45 @@
 <template>
   <div>
-    <div v-if="loading">Loading cookbook....</div>
-    <ul v-else>
-      <h1>{{cookbook.cookbookname}}</h1>
-      <h3>{{cookbook.cookbookdescription}}</h3>
-      <li v-for="recipe in recipes" :key="recipe.recipeid">
-        <router-link :to="`recipe/${recipe.recipeid}`">{{
-          recipe.recipename
-        }}</router-link>
-      </li>
-    </ul>
+    <h1>{{this.cookbook.cookbookname}}</h1>
+    <h3>{{this.cookbook.cookbookdescription}}</h3>
+    <br /><br />
+    <button @click="goToAddRecipe()">Add Recipe</button>
+    <div v-if="loading">Loading recipes....</div>
+    <div v-else><CookbooksRecipeList v-bind:allRecipes="this.recipes"/></div>
   </div>
 </template>
 
 <script>
 import Api from "../api";
+import CookbooksRecipeList from "../components/RecipeList.vue"
 
 export default {
   name: "Cookbook",
+  components: {
+    CookbooksRecipeList
+  },
   data: function () {
     return {
       loading: false,
       cookbook: {},
-      recipes: [],
+      recipes: []
     };
   },
   created: function () {
-    Api.getSingleCookbook(this.cookbook.cookbookid).then((res) => {
-      this.cookbook = res.data;
+    Api.getSingleCookbook(this.$route.params.cookbookid).then((res) => {
+      console.log(res.data)
+      this.cookbook = {...res.data[0]}
     });
-    this.loading = true;
-    Api.getRecipesInCookbook(this.cookbook.cookbookid).then((res) => {
-      this.recipes = res.data;
+    this.loading = true
+    Api.getRecipesInCookbook(this.$route.params.cookbookid).then((res) => {
+      this.recipes = [...res.data]
       this.loading = false;
-    });
+    })
   },
+  methods: {
+    goToAddRecipe () {
+      this.$router.push(`/addRecipe/${this.cookbook.cookbookid}/${this.cookbook.cookbookname}`)
+    }
+  }
 };
 </script>

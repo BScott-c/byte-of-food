@@ -3,14 +3,16 @@
     <b-table-simple hover small caption-top responsive>
       <b-thead>
         <b-tr>
+          <b-th></b-th>
           <b-th>Name</b-th>
           <b-th>Description</b-th>
         </b-tr>
       </b-thead>
       <b-tbody>
-        <b-tr v-for="cookbook in this.allCookbooks" :key="cookbook.cookbookid">
-          <b-td><router-link :to="`/cookbook/${cookbook.cookbookid}`" >{{cookbook.cookbookname}}</router-link></b-td>
-          <b-td>{{ cookbook.cookbookdescription }}</b-td>
+        <b-tr v-for="recipe in this.allRecipes" :key="recipe.recipeid">
+          <b-td><button @click="addRecipe()">+</button></b-td>
+          <b-td>{{recipe.recipename}}</b-td>
+          <b-td>{{ recipe.recipedescription }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -18,13 +20,19 @@
 </template>
 
 <script>
+//import Api from "../api"
 
 export default {
-  name: "CookbookList",
+  name: "AddExistingRecipe",
   props: {
-    allCookbooks: {
+    allRecipes: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    addRecipe() {
+      
     }
   }
 };

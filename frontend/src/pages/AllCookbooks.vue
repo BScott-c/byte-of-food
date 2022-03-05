@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Your Cookbooks!</h1>
-    <button @click="goToCreateCookbook()">Create Cookbook</button>
+    <h1>All Cookbooks</h1>
+    <br /><br />
+    <!-- <button @click="goToCreateCookbook()">Create Cookbook</button> -->
     <div v-if="loading">Loading cookbooks....</div>
     <div v-else><CookbookList v-bind:allCookbooks="this.cookbooks"></CookbookList></div>
   </div>
@@ -9,7 +10,6 @@
 
 <script>
 import Api from "../api";
-import { getJwtToken, getUserIdFromToken } from '../auth';
 import CookbookList from "../components/CookbookList.vue"
 
 export default {
@@ -25,8 +25,7 @@ export default {
   },
   created: function () {
     this.loading = true;
-    const userId = getUserIdFromToken(getJwtToken())
-    Api.getCookbooksForUser(userId).then((res) => {
+    Api.getCookbooks().then((res) => {
       this.cookbooks = [...res.data];
       this.loading = false;
     });
