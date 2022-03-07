@@ -1,6 +1,40 @@
 <template>
-  <div class="col-md-12">
-    <div class="card card-container">
+  <!-- <div class="col-md-12"> -->
+  <b-card title="Create A Cookbook">      
+      <div v-if="message" class="alert alert-danger">
+        {{ message }}
+      </div>
+    <b-form @submit="handleCreate" @reset="onReset">
+      <b-form-group
+        id="input-group-1"
+        label="CookBook Name:"
+        label-for="input-1"
+      >
+        <b-form-input
+          id="input-1"
+          v-model="cookbookName"
+          placeholder="Cookbook Name"
+          required
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-2"
+        label="Cookbook Description:"
+        label-for="input-2"
+      >
+        <b-form-input
+          id="input-2"
+          v-model="cookbookDescription"
+          placeholder="Write a description..."
+        ></b-form-input>
+      </b-form-group>
+      <b-button pill type="submit" variant="primary">Submit</b-button>
+      <span>&nbsp;</span>
+      <b-button pill type="reset" variant="danger">Reset</b-button>
+    </b-form>
+  </b-card>
+  <!-- <div class="card card-container">
       <h1>Create a Cookbook</h1>
       <form name="form" @submit.prevent="handleRegister">
         <div>
@@ -36,13 +70,13 @@
       <div v-if="message" class="alert alert-danger">
         {{ message }}
       </div>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
 </template>
 
 <script>
 import Api from "../api";
-import { getJwtToken, getUserIdFromToken } from '../auth';
+import { getJwtToken, getUserIdFromToken } from "../auth";
 
 export default {
   name: "CreateCookbook",
@@ -58,10 +92,12 @@ export default {
     handleCreate() {
       this.message = "";
       this.loading = true;
-      const userId = getUserIdFromToken(getJwtToken())
+      const userId = getUserIdFromToken(getJwtToken());
       Api.addCookbook(this.cookbookName, this.cookbookDescription, userId)
         .then(() => {
-          console.info('Created cookbook without errors and going to user cookbook page')
+          console.info(
+            "Created cookbook without errors and going to user cookbook page"
+          );
           this.$router.push(`/`);
         })
         .catch((error) => {
@@ -71,7 +107,7 @@ export default {
           }
           this.loading = false;
         });
-    }
+    },
   },
 };
 </script>
