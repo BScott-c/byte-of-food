@@ -15,7 +15,7 @@
         <div v-if="loading">Loading cookbooks....</div>
         <div v-else>
           <CookbookList v-bind:allCookbooks="this.cookbooks"></CookbookList>
-        </div>
+        </div>  
       </b-col>
     </b-row>
   </b-container>
