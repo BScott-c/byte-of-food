@@ -23,16 +23,18 @@
         label="Cookbook Description:"
         label-for="input-2"
       >
-        <b-form-input
+        <b-form-textarea
           id="input-2"
           v-model="cookbookDescription"
           placeholder="Write a description..."
-        ></b-form-input>
+          rows=4
+        ></b-form-textarea>
       </b-form-group>
       <b-button pill type="submit" variant="primary">Submit</b-button>
       <span>&nbsp;</span>
       <b-button pill type="reset" variant="danger">Reset</b-button>
     </b-form>
+    <b-link to="/" class="card-link"> Return back to cookbooks </b-link>
   </b-card>
   <!-- <div class="card card-container">
       <h1>Create a Cookbook</h1>
@@ -107,7 +109,15 @@ export default {
           }
           this.loading = false;
         });
+
     },
+    onReset() {
+      console.info(
+        "Clearing user inputed data."
+      )
+      this.cookbookName = "";
+      this.cookbookDescription = "";
+    }
   },
 };
 </script>

@@ -2,7 +2,7 @@
 <div>
   <!-- Image and text -->
   <b-navbar variant="info" type="dark">
-    <b-navbar-brand href="#">
+    <b-navbar-brand to="/">
       <b-icon-journal-bookmark></b-icon-journal-bookmark>
       Byte Of Food
     </b-navbar-brand>
