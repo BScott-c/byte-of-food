@@ -1,7 +1,7 @@
 CREATE TABLE userTable
 (
   userEmail VARCHAR(1024) NOT NULL,
-  userPassword VARCHAR(1024) NOT NULL,
+  userPassword VARCHAR(1024) NOT NULL CONSTRAINT CHK_Password CHECK (userPassword > 8),
   userFirstName VARCHAR(1024) NOT NULL,
   userLastName VARCHAR(1024) NOT NULL,
   userId SERIAL NOT NULL,

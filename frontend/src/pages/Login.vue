@@ -15,6 +15,7 @@
             type="text"
             class="form-control"
             name="email"
+            required
           />
         </div>
         <div class="form-group">
@@ -24,10 +25,11 @@
             type="password"
             class="form-control"
             name="password"
+            required
           />
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" @click="handleLogin()" :disabled="loading">
+          <button class="btn btn-primary btn-block" @click="submit" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -94,7 +96,7 @@ export default {
     },
     goToRegister() {
       this.$router.push('/register')
-    },
+    }
   },
 };
 

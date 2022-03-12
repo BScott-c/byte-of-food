@@ -7,7 +7,7 @@
         class="profile-img-card"
       />
       <h1>Byte Of Food</h1>
-      <form name="form" @submit.prevent="handleRegister">
+      <form name="form" @submit.prevent="handleRegister()">
         <div>
           <div class="form-group">
             <label for="userfirstname">First Name</label>
@@ -16,6 +16,7 @@
               type="text"
               class="form-control"
               firstName="firstName"
+              required
             />
           </div>
           <div class="form-group">
@@ -25,6 +26,7 @@
               type="text"
               class="form-control"
               lastName="lastName"
+              required
             />
           </div>
           <div class="form-group">
@@ -34,6 +36,7 @@
               type="email"
               class="form-control"
               name="email"
+              required
             />
           </div>
           <div class="form-group">
@@ -43,10 +46,16 @@
               type="password"
               class="form-control"
               name="password"
+              :invalid-feedback="invalidPassword"
+              required
             />
           </div>
+          {{this.errors}}
+          <template v-for="error in this.errors">
+            <p :key="error.id" class='is-invalid'>{{error.message}}</p>
+          </template>
           <div class="form-group">
-            <button class="btn btn-primary btn-block" @click="handleRegister()" :disabled="loading">
+            <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
               <span
                 v-show="loading"
                 class="spinner-border spinner-border-sm"
@@ -77,7 +86,7 @@
 </template>
 
 <script>
-import Api from "../api";
+//import Api from "../api";
 export default {
   name: "Register",
   data() {
@@ -88,29 +97,44 @@ export default {
       password: "",
       loading: false,
       message: "",
+      errors: []
     };
   },
   methods: {
-    handleRegister() {
-      this.message = "";
-      this.loading = true;
+    handleRegister(e) {
+      this.invalidPassword()
+      // if (!this.errors.length) {
+      //   this.message = "";
+      //   this.loading = true;
 
-      Api.signup(this.email, this.firstName, this.lastName, this.password)
-        .then(() => {
-          console.info('Signed UP without errors and going to login page')
-          this.$router.push("/login");
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error.response) {
-            this.message = error.response.data.message;
-          }
-          this.loading = false;
-        });
+      //   Api.signup(this.email, this.firstName, this.lastName, this.password)
+      //     .then(() => {
+      //       console.info('Signed UP without errors and going to login page')
+      //       this.$router.push("/login");
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //       if (error.response) {
+      //         this.message = error.response.data.message;
+      //       }
+      //       this.loading = false;
+      //     });
+      //   return true
+      // }
+      e.preventDefault()
     },
     goToLogin() {
       this.$router.push('/login')
     },
+    invalidPassword() {
+      const passwordErrors = []
+      const regex = /(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/gm
+      const matches = regex.exec(this.password);
+      if (!matches) {
+        passwordErrors.push({id:'passwordError', message: 'Your password must contain at least one digit, uppercase, and lowercase letter.'})
+      }
+      this.errors.splice(passwordErrors)
+    }
   },
 };
 </script>
