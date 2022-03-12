@@ -9,7 +9,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-container class="mx-auto h-75 mb-1" align-v="center">
+        <b-container class="mx-auto mb-1" align-v="center">
         <b-button pill variant="primary" @click="goToCreateCookbook()">Create Cookbook</b-button>
         </b-container>
         <div v-if="loading">Loading cookbooks....</div>
@@ -34,7 +34,7 @@ export default {
   data: function () {
     return {
       loading: false,
-      cookbooks: [],
+      cookbooks: []
     };
   },
   created: function () {
