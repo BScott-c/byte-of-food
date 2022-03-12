@@ -46,13 +46,11 @@
               type="password"
               class="form-control"
               name="password"
-              :invalid-feedback="invalidPassword"
               required
             />
           </div>
-          {{this.errors}}
           <template v-for="error in this.errors">
-            <p :key="error.id" class='is-invalid'>{{error.message}}</p>
+            <b-alert show variant="danger" :key="error.id">{{error.message}}</b-alert>
           </template>
           <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
@@ -86,7 +84,7 @@
 </template>
 
 <script>
-//import Api from "../api";
+import Api from "../api";
 export default {
   name: "Register",
   data() {
@@ -103,37 +101,39 @@ export default {
   methods: {
     handleRegister(e) {
       this.invalidPassword()
-      // if (!this.errors.length) {
-      //   this.message = "";
-      //   this.loading = true;
+      if (!this.errors.length) {
+        this.message = "";
+        this.loading = true;
 
-      //   Api.signup(this.email, this.firstName, this.lastName, this.password)
-      //     .then(() => {
-      //       console.info('Signed UP without errors and going to login page')
-      //       this.$router.push("/login");
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //       if (error.response) {
-      //         this.message = error.response.data.message;
-      //       }
-      //       this.loading = false;
-      //     });
-      //   return true
-      // }
+        Api.signup(this.email, this.firstName, this.lastName, this.password)
+          .then(() => {
+            console.info('Signed UP without errors and going to login page')
+            this.$router.push("/login");
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.response) {
+              this.message = error.response.data.message;
+            }
+            this.loading = false;
+          });
+        return true
+      }
       e.preventDefault()
     },
     goToLogin() {
       this.$router.push('/login')
     },
     invalidPassword() {
+      console.log('checking password')
       const passwordErrors = []
       const regex = /(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/gm
       const matches = regex.exec(this.password);
       if (!matches) {
-        passwordErrors.push({id:'passwordError', message: 'Your password must contain at least one digit, uppercase, and lowercase letter.'})
+        passwordErrors.push({id:'passwordError', message: 'Your password must be at least 8 characters and contain at least one digit, uppercase, and lowercase letter.'})
       }
-      this.errors.splice(passwordErrors)
+      this.errors = [...passwordErrors]
+      console.log('errors in here: ', this.errors)
     }
   },
 };
