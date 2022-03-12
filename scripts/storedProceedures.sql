@@ -32,9 +32,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- pass in cookbookId as id 
+CREATE OR REPLACE FUNCTION recipestoaddtocookbook(id integer)
+RETURNS TABLE (
+  recipeid INT,
+  recipeinstructions VARCHAR,
+  recipedescription VARCHAR
+) AS $$
+BEGIN
+  RETURN QUERY SELECT r.recipeid, r.recipename, r.recipeDescription  from recipe as r where r.recipeid NOT IN ((SELECT h.recipeid from holds as h where h.cookbookid = id));
+END;
+$$ LANGUAGE plpgsql;
+
 GRANT EXECUTE ON FUNCTION
   trigger_set_update_timestamp_recipe(),
   trigger_set_update_timestamp_cookbook(),
   togglePrivate(integer),
-  toggleAdmin(integer)
+  toggleAdmin(integer),
+  getRecipesNotInCookbook(integer)
   TO anonymous;

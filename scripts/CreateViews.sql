@@ -8,7 +8,7 @@ SELECT h.cookbookid, r.recipeid, r.recipename, r.recipedescription, r.isprivate 
 FULL JOIN holds as h on r.recipeid = h.recipeid;
 -- Get Recipe by recipe id where recipeid = '3'
 CREATE OR REPLACE VIEW Recipes AS 
-SELECT recipeid, recipename, recipeinstructions 
+SELECT recipeid, recipename, recipeinstructions, userid 
 from recipe;
 -- Get Recipe Equipment where i.recipeid = '3'
 CREATE OR REPLACE VIEW RecipeEquipment AS

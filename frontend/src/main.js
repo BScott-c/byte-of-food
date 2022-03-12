@@ -75,6 +75,11 @@ const router = new VueRouter({
       component: AllCookbooks,
       beforeEnter: checkAuth
     }, // get all cookbooks for user
+    // { 
+    //   path: "/recipe/:recipeid", 
+    //   component: SingleRecipe,
+    //   beforeEnter: checkAuth
+    // },
     { 
       path: "/cookbook/:cookbookid",
       name: "Cookbook",

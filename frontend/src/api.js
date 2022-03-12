@@ -58,13 +58,24 @@ class Api {
     return axios.get(API_URL + `/cookbookrecipes?cookbookid=eq.${cookbookid}`, {});
   }
 
+  getRecipe(filter){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
+    const query = '/recipes'
+    if (filter.length > 0) query.concat('?')
+    filter.every(param => {query.concat(`${param.dbparam}=eq.${param.value}&`)})
+    query.substring(0, query.length - 1) // remove & from the end
+    return axios.get(API_URL + query)
+  }
+
   async getRecipesNotInCookbook(cookbookid) {
-    let allRecipesNotInCookbook = []
-    const first = await axios.get(API_URL + `/cookbookrecipes?cookbookid!=eq.${cookbookid}`, {});
-    const second = await axios.get(API_URL + `/cookbookrecipes?cookbookid`, {});
-    console.log('1: ', first)
-    console.log('2:', second)
-    return allRecipesNotInCookbook
+    return axios.post(
+      API_URL + "/rpc/getrecipesnotincookbook",
+      {
+        id: parseInt(cookbookid)
+      },
+      {
+        headers: authHeader(),
+      }
+    );
   }
 
   createRecipe(recipeName, recipeDescription, recipeInstructions, isPrivate, userId) {

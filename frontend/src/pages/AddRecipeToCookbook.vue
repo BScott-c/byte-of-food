@@ -2,8 +2,8 @@
   <div >
     <div>
       <h1>Add a Recipe to "{{this.$route.params.cookbookname}}"</h1>  
-      <div v-if="addNew">
-        <AddNewRecipe v-bind:addNew="this.addNew"/>
+      <div v-if="this.addNew">
+        <AddNewRecipe @return="toggleAddNew()" />
       </div>
       <div v-else>
         <AddExistingRecipe v-bind:allRecipes="recipesNotInCookbook"/>
@@ -29,15 +29,16 @@ export default {
   data() {
     return {
       recipesNotInCookbook: [],
-      addNew: false,
       loading: false,
+      addNew: false,
       message: ""
     };
   },
   created: function () {
+    console.log(this.$route)
     this.loading = true;
     Api.getRecipesNotInCookbook(this.$route.params.cookbookid).then((res) => {
-      this.recipesNotInCookbook = [...res.data];
+      this.recipesNotInCookbook = [...res];
       this.loading = false;
     });
   },

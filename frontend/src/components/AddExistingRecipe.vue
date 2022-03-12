@@ -10,7 +10,7 @@
       </b-thead>
       <b-tbody>
         <b-tr v-for="recipe in this.allRecipes" :key="recipe.recipeid">
-          <b-td><button @click="addRecipe()">+</button></b-td>
+          <b-td><button @click="addRecipe(recipe.recipeid)">+</button></b-td>
           <b-td>{{recipe.recipename}}</b-td>
           <b-td>{{ recipe.recipedescription }}</b-td>
         </b-tr>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-//import Api from "../api"
+import Api from "../api"
 
 export default {
   name: "AddExistingRecipe",
@@ -31,7 +31,15 @@ export default {
     }
   },
   methods: {
-    addRecipe() {
+    addRecipe(recipeid) {
+      const cookbookid = this.$route.params.cookbookid
+      Api.addRecipeToCookbook(cookbookid, recipeid).then(() => {
+        // reload recipes
+        Api.getRecipesNotInCookbook(cookbookid).then (res => {
+          this.allRecipes = [...res.data]
+        })
+      })
+      
       
     }
   }
