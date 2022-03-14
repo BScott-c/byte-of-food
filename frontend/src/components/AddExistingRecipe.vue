@@ -16,6 +16,9 @@
         </b-tr>
       </b-tbody>
     </b-table-simple>
+    <div v-if="!this.allRecipes.length">
+      <b-alert show variant="info">There are no more recipes to add!</b-alert>
+    </div>
   </div>
 </template>
 
@@ -36,7 +39,9 @@ export default {
       Api.addRecipeToCookbook(cookbookid, recipeid).then(() => {
         // reload recipes
         Api.getRecipesNotInCookbook(cookbookid).then (res => {
+          console.log('before: ', this.allRecipes)
           this.allRecipes = [...res.data]
+          console.log('after: ', this.allRecipes)
         })
       })
       

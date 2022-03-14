@@ -1,14 +1,6 @@
 <template>
   <div>
     <div>
-
-      <p v-if="this.errors.length">
-        <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in this.errors" :key="error">{{ error }}</li>
-        </ul>
-      </p>
-      
       <form name="form" @submit.prevent="handleCreate">
         <div class="form-group">
           <label for="recipeName">Recipe Name</label>
@@ -42,8 +34,11 @@
             ></b-form-radio-group>
           </b-form-group>
         </div>
+        <template v-for="error in this.errors">
+            <b-alert show variant="danger" :key="error.id">{{error.message}}</b-alert>
+          </template>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" @click="submit" :disabled="loading">
+          <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -84,25 +79,26 @@ export default {
   },
   methods: {
     async handleCreate(e) {
-      // TODO: rerun view to include userid
       // check validation
-      const recipeNameCheck = await Api.getRecipe([{dbparam: 'userid', value: this.userId}])
-      if(recipeNameCheck.every(recipe => {
-        recipe.recipename === this.recipeName
-      })) this.errors.push('That recipe name already exists. Please try another.')
-      
+      await this.nameValidation();
       if (!this.errors.length){
         // create
         await Api.createRecipe(this.recipeName, this.recipeDescription, this.recipeInstructions, this.isPrivate, this.userId)
         // get Id
         const createdRecipe = await Api.getRecipe([{dbparam: 'userid', value: this.userId}, {dbparam: 'recipename', value: this.recipeName}])
-        const recipeId = createdRecipe[0].recipeid
+        const recipeId = createdRecipe.data[0].recipeid
         // add
-        Api.addRecipeToCookbook(this.$route.params.cookbookid, recipeId)
-        this.$emit('return', false) // will set addNew to false
+        await Api.addRecipeToCookbook(this.$route.params.cookbookid, recipeId)
+        this.$router.push(`/cookbook/${this.$route.params.cookbookid}`)
       }
 
       e.preventDefault();
+    },
+    async nameValidation () {
+      const recipeErrors = []
+      const recipeNameCheck = await Api.getRecipe([{dbparam: 'userid', value: this.userId}])
+      if(recipeNameCheck.data.find(element => element.recipename === this.recipeName)) recipeErrors.push({id: 'invalidName', message: 'That recipe name already exists. Please try another.'})
+      this.errors = [...recipeErrors]
     }
   }
 };

@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-          <a href='/'>« Back to Recipes</a>
+          <a href='/'>« Back to Cookbooks</a>
         <b-container class="mx-auto h-50 text-center">
         <h1>{{this.cookbook.cookbookname}}</h1>
         <p class="description">

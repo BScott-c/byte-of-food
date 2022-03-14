@@ -33,14 +33,14 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- pass in cookbookId as id 
-CREATE OR REPLACE FUNCTION recipestoaddtocookbook(id integer)
+CREATE OR REPLACE FUNCTION recipestoaddtocookbook(id text)
 RETURNS TABLE (
   recipeid INT,
-  recipeinstructions VARCHAR,
+  recipename VARCHAR,
   recipedescription VARCHAR
 ) AS $$
 BEGIN
-  RETURN QUERY SELECT r.recipeid, r.recipename, r.recipeDescription  from recipe as r where r.recipeid NOT IN ((SELECT h.recipeid from holds as h where h.cookbookid = id));
+  RETURN QUERY SELECT r.recipeid, r.recipename, r.recipeDescription  from recipe as r where r.recipeid NOT IN ((SELECT h.recipeid from holds as h where h.cookbookid = CAST(id as integer)));
 END;
 $$ LANGUAGE plpgsql;
 

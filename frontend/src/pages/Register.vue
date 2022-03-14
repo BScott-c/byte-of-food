@@ -133,7 +133,6 @@ export default {
         passwordErrors.push({id:'passwordError', message: 'Your password must be at least 8 characters and contain at least one digit, uppercase, and lowercase letter.'})
       }
       this.errors = [...passwordErrors]
-      console.log('errors in here: ', this.errors)
     }
   },
 };

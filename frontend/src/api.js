@@ -59,18 +59,18 @@ class Api {
   }
 
   getRecipe(filter){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
-    const query = '/recipes'
-    if (filter.length > 0) query.concat('?')
-    filter.every(param => {query.concat(`${param.dbparam}=eq.${param.value}&`)})
-    query.substring(0, query.length - 1) // remove & from the end
+    let query = '/recipes'
+    if (filter.length > 0) query += '?'
+    filter.forEach(param => query += `${param.dbparam}=eq.${param.value}&`)
+    query = query.substring(0, query.length - 1) // remove & from the end
     return axios.get(API_URL + query)
   }
 
-  async getRecipesNotInCookbook(cookbookid) {
+  getRecipesNotInCookbook(cookbookid) {
     return axios.post(
-      API_URL + "/rpc/getrecipesnotincookbook",
+      API_URL + "/rpc/recipestoaddtocookbook",
       {
-        id: parseInt(cookbookid)
+        id: `${cookbookid}`
       },
       {
         headers: authHeader(),
@@ -95,6 +95,7 @@ class Api {
   }
 
   addRecipeToCookbook(cookbookId, recipeId){
+    console.log('adding: ', cookbookId, recipeId, 'to cookbook')
     return axios.post(API_URL + `/holds`, 
     {
       cookbookid: cookbookId,
@@ -111,6 +112,18 @@ class Api {
     {
       headers: authHeader(),
     });
+  }
+
+  togglePrivacy(recipeId){
+    return axios.post(
+      API_URL + "/rpc/toggleprivate",
+      {
+        id: recipeId
+      },
+      {
+        headers: authHeader(),
+      }
+    );
   }
 
 
