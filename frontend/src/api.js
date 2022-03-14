@@ -127,6 +127,13 @@ class Api {
   signup(email, firstname, lastname, password) {
     return axios.post(API_URL + "/rpc/signup", { email, firstname, lastname, password });
   }
+
+  getAdminStatus(user_id) {
+    return axios.post(API_URL + `/adminstatus?userid=eq.${user_id}`, { }, { });
+    // {
+    //   headers: authHeader(),
+    // });
+  }
 }
 
 export default new Api();
