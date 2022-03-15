@@ -11,7 +11,7 @@ import Register from "./pages/Register";
 import Cookbook from "./pages/Cookbook";
 import AllCookbooks from "./pages/AllCookbooks"
 import CreateCookbook from "./pages/CreateCookbook"
-import CreateRecipe from "./pages/CreateRecipe"
+import Recipe from './pages/Recipe.vue'
 import AddRecipeToCookbook from "./pages/AddRecipeToCookbook"
 import AppBar from "./components/AppBar.vue"
 import AdminArticleAdd from "./components/AdminArticleAdd";
@@ -61,25 +61,20 @@ const router = new VueRouter({
     beforeEnter: checkAuth
     },
     {  
-      path: "/recipe/create/:cookbookid?", 
-      component: CreateRecipe,
-      beforeEnter: checkAuth
-      },
-    {  
       path: "/addRecipe/:cookbookid/:cookbookname", 
       component: AddRecipeToCookbook,
       beforeEnter: checkAuth
-      },
+    },
     { 
       path: "/usercookbooks/:userid", 
       component: AllCookbooks,
       beforeEnter: checkAuth
     }, // get all cookbooks for user
-    // { 
-    //   path: "/recipe/:recipeid", 
-    //   component: SingleRecipe,
-    //   beforeEnter: checkAuth
-    // },
+    { 
+      path: "/recipe/:recipeid", 
+      component: Recipe,
+      beforeEnter: checkAuth
+    },
     { 
       path: "/cookbook/:cookbookid",
       name: "Cookbook",

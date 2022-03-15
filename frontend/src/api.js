@@ -59,6 +59,7 @@ class Api {
   }
 
   getRecipe(filter){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
+    console.log('in get recipe: ', filter)
     let query = '/recipes'
     if (filter.length > 0) query += '?'
     filter.forEach(param => query += `${param.dbparam}=eq.${param.value}&`)

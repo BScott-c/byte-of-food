@@ -14,7 +14,7 @@
       </b-thead>
       <b-tbody>
         <b-tr v-for="recipe in allRecipes" :key="recipe.recipeid">
-          <b-td><router-link :to="`recipe/${recipe.recipeid}`">{{ recipe.recipename }}</router-link></b-td>
+          <b-td><router-link :to="`/recipe/${recipe.recipeid}`">{{ recipe.recipename }}</router-link></b-td>
           <b-td>{{ recipe.recipedescription }}</b-td>
           <b-td v-if="recipe.isprivate === true">Private</b-td>
           <b-td v-else>Public</b-td>
