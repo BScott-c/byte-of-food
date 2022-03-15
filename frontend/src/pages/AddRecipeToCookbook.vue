@@ -26,7 +26,7 @@
         </div>
         <div v-else>
           <h2>Pick a Recipe...</h2>
-          <AddExistingRecipe v-bind:allRecipes="recipesNotInCookbook" />
+          <AddExistingRecipe :allRecipes="recipesNotInCookbook"/>
         </div>
       </b-container>
     </b-col>
@@ -49,7 +49,7 @@ export default {
       recipesNotInCookbook: [],
       loading: false,
       addNew: false,
-      message: "",
+      message: ""
     };
   },
   created: function () {

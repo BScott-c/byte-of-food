@@ -7,28 +7,26 @@
       header-text-variant="white"
     >
       <div v-if="editting">
-        
-          
           <b-list-group flush>
             <b-form-group>
-              <b-list-group-item v-for="(task, number) of this.formattedInstructions" :key="number">
-                <b-input-group>{{number+1}}. 
-                  <b-form-input 
-                  v-bind="formattedInstructions[number]" 
-                  :value="task"
-                  ></b-form-input>
+              <b-list-group-item v-for="item of this.formattedInstructions" :key="item.ordinal">
+                <b-input-group>{{item.ordinal}}. 
+                    <b-form-input 
+                    v-model="formattedInstructions[item.ordinal-1].instruction" 
+                    :value="item.instruction"
+                    @change="addEmptyObject"
+                    ></b-form-input>
                   </b-input-group>
               </b-list-group-item>
             </b-form-group>
           </b-list-group>
-          <b-button @click="toggleEdit" variant="info">Cancel</b-button> <b-button @click="toggleEdit" variant="info">Save</b-button>
-        
+          <b-button @click="toggleEdit" variant="info">Cancel</b-button> <b-button @click="modifyInstructions" variant="info">Save</b-button> 
       </div>
       <div v-else>
         <b-list-group flush>
-          <b-list-group-item v-for="(task, number) of this.formattedInstructions" :key="number">{{number+1}}. {{task}}</b-list-group-item>
+          <b-list-group-item v-for="item of this.formattedInstructions" :key="item.ordinal">{{item.ordinal}}. {{item.instruction}}</b-list-group-item>
         </b-list-group>
-        <b-button @click="toggleEdit" variant="info">Edit</b-button>
+        <b-button v-if="this.canEdit" @click="toggleEdit" variant="info">Edit</b-button>
       </div>
     </b-card>
   </div>
@@ -38,10 +36,15 @@
 import Api from "../api"
 
 export default {
-  name: "AddNewRecipe",
+  name: "RecipeInstructions",
   props: {
     instructions: {
       type: String,
+      required: true,
+      default: ""
+    },
+    canEdit: {
+      type: Boolean,
       required: true
     }
   },
@@ -49,20 +52,72 @@ export default {
     return {
       loading: false,
       editting: false,
-      test: "hello, there, you are a, fool",
       formattedInstructions: []
     };
   },
   created: function () {
-    const newInstructions = this.test.split(',') // TODO: Switch this to this.instructions
-    this.formattedInstructions = [...newInstructions]
+    const newInstructions = this.instructions.split(',')
+    this.convertArrayToObject(newInstructions)
   },
   methods: {
     toggleEdit() {
-      this.editting = !this.editting
+      if (this.canEdit){
+        this.editting = !this.editting
+        if (this.editting){
+          this.addEmptyObject()
+        } else {
+          this.removeEmptyObjects()
+        }
+      }
     },
-    handleCreate() {
-      Api.createRecipe(this.recipeName, this.recipeDescription, this.recipeInstructions, this.isPrivate, this.userId)
+    convertArrayToObject (arrayOfStrings) {
+      let newArray = [];
+      for (const [key, value] of arrayOfStrings.entries()) {
+        newArray = [
+          ...newArray,
+          {
+            ordinal: key+1,
+            instruction: value
+          }
+        ]
+      }
+      console.log('here: ', newArray)
+      this.formattedInstructions = [...newArray]
+    },
+    convertArrayToString (arrayOfObjects) {
+      const arrayOfStrings = arrayOfObjects.map(item => item.instruction)
+      return arrayOfStrings.join()
+    },
+    modifyInstructions (){
+      this.removeEmptyObjects()
+      const newInstructions = this.convertArrayToString(this.formattedInstructions)
+      const updateBody = {
+        recipeinstructions: newInstructions
+      }
+      Api.updateRecipe(this.$route.params.recipeid, updateBody).then(() => {
+        this.instructions = newInstructions
+      })
+    },
+    addEmptyObject (){
+      const alreadyHasEmptyObject = this.formattedInstructions.some(value => value.instruction === "")
+      if (!alreadyHasEmptyObject){
+        const emptyObject = {
+              ordinal: this.formattedInstructions.length+1,
+              instruction: ''
+            }
+        this.formattedInstructions = [
+            ...this.formattedInstructions,
+            emptyObject
+          ]
+      }
+    },
+    removeEmptyObjects(){
+      const newArray = this.formattedInstructions.filter(item => item.instruction !== "")
+      // correct any issues in ordinal (i.e. if a middle object was removed)
+      for (const [key, value] of newArray.entries()) {
+        if (key+1 !== value.ordinal) value.ordinal = key+1
+      }
+      this.formattedInstructions = [...newArray]
     }
   }
 };

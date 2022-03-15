@@ -67,6 +67,16 @@ class Api {
     return axios.get(API_URL + query)
   }
 
+  updateRecipe(recipeid, body){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
+    return axios.patch(
+      API_URL + `/recipe?recipeid=eq.${recipeid}`,
+      body,
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
   getRecipesNotInCookbook(cookbookid) {
     return axios.post(
       API_URL + "/rpc/recipestoaddtocookbook",

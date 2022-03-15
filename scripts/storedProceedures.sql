@@ -37,10 +37,12 @@ CREATE OR REPLACE FUNCTION recipestoaddtocookbook(id text)
 RETURNS TABLE (
   recipeid INT,
   recipename VARCHAR,
-  recipedescription VARCHAR
+  recipedescription VARCHAR,
+  userid INT,
+  isprivate BOOLEAN
 ) AS $$
 BEGIN
-  RETURN QUERY SELECT r.recipeid, r.recipename, r.recipeDescription  from recipe as r where r.recipeid NOT IN ((SELECT h.recipeid from holds as h where h.cookbookid = CAST(id as integer)));
+  RETURN QUERY SELECT r.recipeid, r.recipename, r.recipeDescription, r.userid, r.isprivate  from recipe as r where r.recipeid NOT IN ((SELECT h.recipeid from holds as h where h.cookbookid = CAST(id as integer)));
 END;
 $$ LANGUAGE plpgsql;
 
