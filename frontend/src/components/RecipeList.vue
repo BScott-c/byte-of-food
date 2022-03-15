@@ -1,6 +1,7 @@
 <template>
   <div>
     
+    
     <b-table-simple hover small caption-top responsive>
       <b-thead>
         <b-tr>
@@ -17,12 +18,32 @@
           <b-td>{{ recipe.recipedescription }}</b-td>
           <b-td v-if="recipe.isprivate === true">Private</b-td>
           <b-td v-else>Public</b-td>
-          <b-td v-if="recipe.isprivate === true"><b-icon icon="lock-fill" class="rounded bg-primary p-1 h5" variant="light"></b-icon></b-td>
-          <b-td v-else><template #button-content><b-icon icon="unlock-fill" aria-hidden="true" class="rounded bg-secondary p-1 h5" variant="light"></b-icon></template></b-td>
-          <b-td><b-icon icon="trash-fill" class="rounded bg-secondary p-1 h5" variant="light"></b-icon></b-td>
+          <b-td v-if="recipe.isprivate === true">
+            <b-button-group class="mr-1">
+              <b-button @click="togglePrivacy(recipe.recipeid)" title="Private" class="rounded bg-primary p-1">
+                  <b-icon icon="lock-fill" variant="light" aria-hidden="true"></b-icon>
+              </b-button>
+            </b-button-group>  
+          </b-td>
+          <b-td v-else>
+            <b-button-group class="mr-1">
+              <b-button @click="togglePrivacy(recipe.recipeid)" title="Public" class="rounded bg-secondary p-1">
+                  <b-icon icon="unlock-fill" variant="light" aria-hidden="true"></b-icon>
+              </b-button>
+            </b-button-group>
+          </b-td>
+          <b-td>
+            <b-button-group class="mr-1">
+              <b-button @click="removeFromCookbook(recipe.recipeid)" title="Remove Recipe" class="rounded bg-secondary p-1">
+                  <b-icon icon="trash-fill" variant="light" aria-hidden="true"></b-icon>
+              </b-button>
+            </b-button-group>
+          </b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
+
+    
   </div>
 </template>
 
@@ -39,10 +60,20 @@ export default {
   },
   methods: {
     togglePrivacy(recipeId){
-      Api.togglePrivacy(recipeId)
+      Api.togglePrivacy(recipeId).then(() => {
+        // reload recipes on page
+        Api.getRecipesInCookbook(this.$route.params.cookbookid).then(res => {
+          this.allRecipes = [...res.data]
+        })
+      })
     },
-    removeFromCookbook(){
-
+    removeFromCookbook(recipeId){
+      Api.removeRecipeFromCookbook(this.$route.params.cookbookid, recipeId).then(() => {
+        // reload recipes on page
+        Api.getRecipesInCookbook(this.$route.params.cookbookid).then(res => {
+          this.allRecipes = [...res.data]
+        })
+      })
     }
   }
 };

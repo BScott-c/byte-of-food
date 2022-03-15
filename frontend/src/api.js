@@ -107,7 +107,7 @@ class Api {
   }
 
   removeRecipeFromCookbook(cookbookId, recipeId){
-    return axios.delete(API_URL + `/holds?cookbookid=eq.${cookbookId}&recipeid=eq${recipeId}`, 
+    return axios.delete(API_URL + `/holds?cookbookid=eq.${cookbookId}&recipeid=eq.${recipeId}`, 
     {},
     {
       headers: authHeader(),
