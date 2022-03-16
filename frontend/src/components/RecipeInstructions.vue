@@ -56,7 +56,9 @@ export default {
     };
   },
   created: function () {
+    console.log('instructions string: ', this.instructions)
     const newInstructions = this.instructions.split(',')
+    console.log('1: ', newInstructions)
     this.convertArrayToObject(newInstructions)
   },
   methods: {
@@ -81,7 +83,7 @@ export default {
           }
         ]
       }
-      console.log('here: ', newArray)
+      console.log('2: ', newArray)
       this.formattedInstructions = [...newArray]
     },
     convertArrayToString (arrayOfObjects) {
@@ -97,6 +99,7 @@ export default {
       Api.updateRecipe(this.$route.params.recipeid, updateBody).then(() => {
         this.instructions = newInstructions
       })
+      this.toggleEdit()
     },
     addEmptyObject (){
       const alreadyHasEmptyObject = this.formattedInstructions.some(value => value.instruction === "")

@@ -3,7 +3,7 @@
     <div>
       <h1>{{recipe.recipename}}</h1>
       <h3>{{recipe.recipedescription}}</h3>
-      <RecipeInstructions v-bind:instructions="recipe.recipeinstructions" v-bind:canEdit="canEdit"/>
+      <RecipeInstructions v-bind:instructions="recipe.recipeinstructions" v-bind:canEdit="canEdit" v-if="recipe.recipeinstructions"/>
     </div>
   </div>
 </template>
