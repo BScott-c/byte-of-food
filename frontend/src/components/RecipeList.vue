@@ -19,21 +19,21 @@
           <b-td v-if="recipe.isprivate === true">Private</b-td>
           <b-td v-else>Public</b-td>
           <b-td v-if="recipe.isprivate === true">
-            <b-button-group class="mr-1">
+            <b-button-group v-if="canEdit" class="mr-1">
               <b-button @click="togglePrivacy(recipe.recipeid)" title="Private" class="rounded bg-primary p-1">
                   <b-icon icon="lock-fill" variant="light" aria-hidden="true"></b-icon>
               </b-button>
             </b-button-group>  
           </b-td>
           <b-td v-else>
-            <b-button-group class="mr-1">
+            <b-button-group v-if="canEdit" class="mr-1">
               <b-button @click="togglePrivacy(recipe.recipeid)" title="Public" class="rounded bg-secondary p-1">
                   <b-icon icon="unlock-fill" variant="light" aria-hidden="true"></b-icon>
               </b-button>
             </b-button-group>
           </b-td>
           <b-td>
-            <b-button-group class="mr-1">
+            <b-button-group v-if="canEdit" class="mr-1">
               <b-button @click="removeFromCookbook(recipe.recipeid)" title="Remove Recipe" class="rounded bg-secondary p-1">
                   <b-icon icon="trash-fill" variant="light" aria-hidden="true"></b-icon>
               </b-button>
@@ -55,6 +55,10 @@ export default {
   props: {
     allRecipes: {
       type: Array,
+      required: true
+    },
+    canEdit: {
+      type: Boolean,
       required: true
     }
   },

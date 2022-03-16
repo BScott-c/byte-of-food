@@ -18,7 +18,7 @@
         </b-container>
         <div v-if="loading">Loading recipes....</div>
         <div v-else>
-          <CookbooksRecipeList v-bind:allRecipes="this.recipes"/>
+          <CookbooksRecipeList v-bind:allRecipes="this.recipes" :canEdit="canEdit"/>
         </div>  
       </b-col>
     </b-row>
@@ -28,7 +28,7 @@
 <script>
 import Api from "../api";
 import CookbooksRecipeList from "../components/RecipeList.vue"
-
+import { getUserIdFromToken, getJwtToken } from "../auth"
 export default {
   name: "Cookbook",
   components: {
@@ -38,7 +38,8 @@ export default {
     return {
       loading: false,
       cookbook: {},
-      recipes: []
+      recipes: [],
+      canEdit: false
     };
   },
   created: function () {
@@ -49,6 +50,8 @@ export default {
     this.loading = true
     Api.getRecipesInCookbook(this.$route.params.cookbookid).then((res) => {
       this.recipes = [...res.data]
+      const userId = getUserIdFromToken(getJwtToken())
+      if (res.data[0].userid == userId) this.canEdit = true
       this.loading = false;
     })
   },

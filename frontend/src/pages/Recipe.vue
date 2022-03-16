@@ -3,7 +3,7 @@
     <div>
       <h1>{{recipe.recipename}}</h1>
       <h3>{{recipe.recipedescription}}</h3>
-      <RecipeInstructions v-bind:instructions="recipe.recipeinstructions" v-bind:canEdit="canEdit" v-if="recipe.recipeinstructions"/>
+      <RecipeInstructions v-bind:instructions="recipe.recipeinstructions" v-bind:canEdit="canEdit" v-if="recipe.recipeinstructions || recipe.recipeinstructions === ''"/>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
       this.recipe = {...res.data[0]};
       const userId = getUserIdFromToken(getJwtToken())
       if (res.data[0].userid == userId) this.canEdit = true
+      console.log('Can Edit: ', this.canEdit)
       this.loading = false;
     })
   },

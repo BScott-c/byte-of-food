@@ -4,7 +4,7 @@ SELECT userid, cookbookid, cookbookname, cookbookdescription
 from cookbook;
 -- Get Recipes Associated with a single Cookbook  where h.cookbookid = ?
 CREATE OR REPLACE VIEW CookbookRecipes AS 
-SELECT h.cookbookid, r.recipeid, r.recipename, r.recipedescription, r.isprivate from recipe as r 
+SELECT h.cookbookid, r.recipeid, r.recipename, r.recipedescription, r.isprivate, r.userid from recipe as r 
 FULL JOIN holds as h on r.recipeid = h.recipeid;
 -- Get Recipe by recipe id where recipeid = '3'
 CREATE OR REPLACE VIEW Recipes AS 

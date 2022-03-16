@@ -20,7 +20,7 @@
               </b-list-group-item>
             </b-form-group>
           </b-list-group>
-          <b-button @click="toggleEdit" variant="info">Cancel</b-button> <b-button @click="modifyInstructions" variant="info">Save</b-button> 
+          <b-button @click="cancel" variant="info">Cancel</b-button> <b-button @click="modifyInstructions" variant="info">Save</b-button> 
       </div>
       <div v-else>
         <b-list-group flush>
@@ -52,7 +52,8 @@ export default {
     return {
       loading: false,
       editting: false,
-      formattedInstructions: []
+      formattedInstructions: [],
+      oldInstructions: []
     };
   },
   created: function () {
@@ -72,6 +73,10 @@ export default {
         }
       }
     },
+    cancel(){
+      this.formattedInstructions = [...this.oldInstructions]
+      this.toggleEdit()
+    },
     convertArrayToObject (arrayOfStrings) {
       let newArray = [];
       for (const [key, value] of arrayOfStrings.entries()) {
@@ -85,6 +90,7 @@ export default {
       }
       console.log('2: ', newArray)
       this.formattedInstructions = [...newArray]
+      this.oldInstructions = [...newArray]
     },
     convertArrayToString (arrayOfObjects) {
       const arrayOfStrings = arrayOfObjects.map(item => item.instruction)
