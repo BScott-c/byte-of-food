@@ -33,7 +33,8 @@ export default {
     };
   },
   created: function () {
-    Api.getAdminStatus(getUserIdFromToken(getJwtToken())).then((res) => {
+    const user_id = getUserIdFromToken(getJwtToken())
+    Api.getAdminStatus(user_id).then((res) => {
       console.log("admin data: ", res.data[0]);
       if (res.data[0].isadmin) {
         this.AdminStatus = true;

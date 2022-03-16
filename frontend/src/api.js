@@ -152,11 +152,45 @@ class Api {
     return axios.post(API_URL + "/rpc/signup", { email, firstname, lastname, password });
   }
 
+  getAllUsers() {
+    return axios.get(API_URL + "/usertable",
+    {},
+    {
+      headers: authHeader(),
+    })
+  }
+
   getAdminStatus(user_id) {
-    return axios.post(API_URL + `/adminstatus?userid=eq.${user_id}`, { }, { });
-    // {
-    //   headers: authHeader(),
-    // });
+    return axios.get(
+      API_URL + `/adminstatus?userid=eq.${user_id}`,
+      {
+
+      },
+      {
+        headers: authHeader(),
+      });
+  }
+
+  toggleAdminStatus(user_id) {
+    return axios.post(
+      API_URL + `/rpc/toggleadmin`,
+      {
+        id: user_id
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  deleteUser(user_id) {
+    return axios.delete(
+      API_URL + `/usertable?userid=eq.${user_id}`,
+      {},
+      {
+        headers: authHeader(),
+      }
+    );
   }
 }
 
