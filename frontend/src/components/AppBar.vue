@@ -6,15 +6,17 @@
         <b-icon-journal-bookmark></b-icon-journal-bookmark>
         Byte Of Food
       </b-navbar-brand>
-      <b-nav-text> Create to your hearts content... </b-nav-text>
+      <b-nav-text class="text-white"> Create to your hearts content... </b-nav-text>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item to="/">Cookbooks</b-nav-item>
-        <b-nav-item to="/">Favorite Recipes</b-nav-item>
+        <b-nav-item class="mx-2 text-white" to="/">Cookbooks</b-nav-item>
+        <b-nav-item class="mx-2" to="/">Favorite Recipes</b-nav-item>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span v-if="AdminStatus">
-          <b-button variant="warning" to="/Admin">Admin Page</b-button>
+          <b-button class="mx-2" variant="warning" to="/Admin">Admin Page</b-button>
         </span>
-        <b-button variant="danger" to="/Logout">Logout</b-button>
+        <span>
+          <b-button class="ml-2" variant="danger" to="/Logout">Logout</b-button>
+        </span>
       </b-navbar-nav>
     </b-navbar>
   </div>

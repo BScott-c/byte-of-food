@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-
       <h1>{{recipe.recipename}}</h1>
       <h3>{{recipe.recipedescription}}</h3>
       <b-button v-if="this.canEdit" @click="toggleManage" title="Manage Recipe" :class="buttonClass">
