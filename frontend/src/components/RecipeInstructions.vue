@@ -57,9 +57,7 @@ export default {
     };
   },
   created: function () {
-    console.log('instructions string: ', this.instructions)
     const newInstructions = this.instructions.split(',')
-    console.log('1: ', newInstructions)
     this.convertArrayToObject(newInstructions)
   },
   methods: {
@@ -86,7 +84,6 @@ export default {
           }
         ]
       }
-      console.log('2: ', newArray)
       this.formattedInstructions = [...newArray]
       this.oldInstructions = [...newArray]
     },

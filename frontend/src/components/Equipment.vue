@@ -7,6 +7,7 @@
       header-text-variant="white"
     >
       <div v-if="editting">
+        {{this.selected}}
           <b-list-group flush>
             <b-form-group
               label="Select All Equipment Used:"
@@ -54,10 +55,6 @@ export default {
     AddEquipment
   },
   props: {
-    recipeEquipment: {
-      type: Array,
-      required: true
-    },
     managingRecipe: {
       type: Boolean,
       required: true
@@ -66,6 +63,7 @@ export default {
   computed: {
     options: function (){
       const optionsArray = this.allEquipment.map(item => {
+        console.log(item)
         return {
           text: item.equipmentname,
           value: item
@@ -86,15 +84,14 @@ export default {
         return 0;
       });
     },
-    selected: {
-      get: function (){
-        return [...this.equipmentAdded]
-      },
-      set: function (value) {
-        console.log('called setter: ', value)
-        this.equipmentAdded = [...value]
-      }
-    },
+    // selected: {
+    //   get: function (){
+    //     return [...this.equipmentAdded]
+    //   },
+    //   set: function (value) {
+    //     this.equipmentAdded = [...value]
+    //   }
+    // },
     recipeId: function (){
       return this.$route.params.recipeid
     }
@@ -104,11 +101,16 @@ export default {
       loading: false,
       editting: false,
       allEquipment: [],
-      equipmentAdded: []
+      equipmentAdded: [],
+      recipeEquipment: [],
+      selected: []
     };
   },
   created: function () {
-    this.equipmentAdded = [...this.recipeEquipment]
+    this.getEquipmentInfo().then(() => {
+      this.equipmentAdded = [...this.recipeEquipment]
+      this.selected = [...this.recipeEquipment]
+    })
   },
   methods: {
     toggleEdit() {
@@ -123,6 +125,10 @@ export default {
     async getEquipmentList(){
       const res = await Api.getEquipment()
       this.allEquipment = [...res.data]
+    },
+    async getEquipmentInfo(){
+      const equipmentRes = await Api.getRecipeEquipment(this.recipeId)
+      this.recipeEquipment = [...equipmentRes.data]
     },
     async handleEquipmentCreated(event){
       // update the list
@@ -139,19 +145,18 @@ export default {
     handleSave(){
       this.saveEquipment()
       this.removeEquipment()
-      this.$emit('equipmentSaved')
+      this.getEquipmentList()
       this.toggleEdit()
     },
     saveEquipment(){
       const equipmentToSave = this.equipmentAdded.filter(addedItem => {
         if (this.recipeEquipment.find(recipeItem => addedItem.equipmentid === recipeItem.equipmentid)) {
-          console.log('do not add ', addedItem.equipmentname)
+          console.info('do not add ', addedItem.equipmentname)
         } else {
-          console.log('add ', addedItem.equipmentname)
           return addedItem
         }
       })
-      console.log('adding: ', equipmentToSave)
+      console.info('adding: ', equipmentToSave)
       equipmentToSave.forEach(item => {
         Api.addEquipmentToRecipe(item.equipmentid, this.recipeId)
       });
@@ -159,14 +164,12 @@ export default {
     removeEquipment(){
       const equipmentToRemove = this.recipeEquipment.filter(recipeItem => {
         if (this.equipmentAdded.find(addedItem => addedItem.equipmentid === recipeItem.equipmentid)) {
-          console.log('do not remove ', recipeItem.equipmentname)
+          console.info('do not remove ', recipeItem.equipmentname)
         } else {
-          console.log('remove ', recipeItem.equipmentname)
           return recipeItem
         }
       })
-      console.log('removing: ', equipmentToRemove)
-
+      console.info('removing: ', equipmentToRemove)
       equipmentToRemove.forEach(item => {
         Api.removeEquipmentFromRecipe(item.equipmentid, this.recipeId)
       });

@@ -12,7 +12,7 @@ SELECT recipeid, recipename, recipedescription, recipeinstructions, userid
 from recipe;
 -- Get Recipe Equipment where i.recipeid = '3'
 CREATE OR REPLACE VIEW RecipeEquipment AS
-SELECT i.recipeid, e.equipmentname, e.equipmentdescription from equipment as e 
+SELECT i.recipeid, e.equipmentname, e.equipmentdescription, e.equipmentid from equipment as e 
 FULL JOIN involves as i on e.equipmentid = i.equipmentid;
 -- Get Recipe Ingredients where ing.recipeid = '3'
 CREATE OR REPLACE VIEW RecipeIngredients AS
