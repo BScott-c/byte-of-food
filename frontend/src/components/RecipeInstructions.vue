@@ -20,13 +20,13 @@
               </b-list-group-item>
             </b-form-group>
           </b-list-group>
-          <b-button @click="cancel" variant="info">Cancel</b-button> <b-button @click="modifyInstructions" variant="info">Save</b-button> 
+          <b-button @click="cancel" variant="danger">Cancel</b-button> <b-button @click="modifyInstructions" variant="success">Save</b-button> 
       </div>
       <div v-else>
         <b-list-group flush>
           <b-list-group-item v-for="item of this.formattedInstructions" :key="item.ordinal">{{item.ordinal}}. {{item.instruction}}</b-list-group-item>
         </b-list-group>
-        <b-button v-if="this.canEdit" @click="toggleEdit" variant="info">Edit</b-button>
+        <b-button v-if="this.managingRecipe" @click="toggleEdit" variant="info">Edit</b-button>
       </div>
     </b-card>
   </div>
@@ -43,7 +43,7 @@ export default {
       required: true,
       default: ""
     },
-    canEdit: {
+    managingRecipe: {
       type: Boolean,
       required: true
     }
@@ -64,13 +64,11 @@ export default {
   },
   methods: {
     toggleEdit() {
-      if (this.canEdit){
-        this.editting = !this.editting
-        if (this.editting){
-          this.addEmptyObject()
-        } else {
-          this.removeEmptyObjects()
-        }
+      this.editting = !this.editting
+      if (this.editting){
+        this.addEmptyObject()
+      } else {
+        this.removeEmptyObjects()
       }
     },
     cancel(){

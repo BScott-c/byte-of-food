@@ -53,28 +53,9 @@ class Api {
     );
   }
 
-  // RECIPE ACTIONS
+  // RECIPE - COOKBOOK CALLS
   getRecipesInCookbook(cookbookid) {
     return axios.get(API_URL + `/cookbookrecipes?cookbookid=eq.${cookbookid}`, {});
-  }
-
-  getRecipe(filter){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
-    console.log('in get recipe: ', filter)
-    let query = '/recipes'
-    if (filter.length > 0) query += '?'
-    filter.forEach(param => query += `${param.dbparam}=eq.${param.value}&`)
-    query = query.substring(0, query.length - 1) // remove & from the end
-    return axios.get(API_URL + query)
-  }
-
-  updateRecipe(recipeid, body){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
-    return axios.patch(
-      API_URL + `/recipe?recipeid=eq.${recipeid}`,
-      body,
-      {
-        headers: authHeader(),
-      }
-    );
   }
 
   getRecipesNotInCookbook(cookbookid) {
@@ -82,22 +63,6 @@ class Api {
       API_URL + "/rpc/recipestoaddtocookbook",
       {
         id: `${cookbookid}`
-      },
-      {
-        headers: authHeader(),
-      }
-    );
-  }
-
-  createRecipe(recipeName, recipeDescription, recipeInstructions, isPrivate, userId) {
-    return axios.post(
-      API_URL + `/recipe`,
-      {
-        recipename: recipeName,
-        recipedescription: recipeDescription,
-        recipeinstructions: recipeInstructions,
-        isprivate: isPrivate,
-        userid: userId
       },
       {
         headers: authHeader(),
@@ -125,6 +90,43 @@ class Api {
     });
   }
 
+  // RECIPE CALLS
+
+  getRecipe(filter){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
+    console.log('in get recipe: ', filter)
+    let query = '/recipes'
+    if (filter.length > 0) query += '?'
+    filter.forEach(param => query += `${param.dbparam}=eq.${param.value}&`)
+    query = query.substring(0, query.length - 1) // remove & from the end
+    return axios.get(API_URL + query)
+  }
+
+  updateRecipe(recipeid, body){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
+    return axios.patch(
+      API_URL + `/recipe?recipeid=eq.${recipeid}`,
+      body,
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+  
+  createRecipe(recipeName, recipeDescription, recipeInstructions, isPrivate, userId) {
+    return axios.post(
+      API_URL + `/recipe`,
+      {
+        recipename: recipeName,
+        recipedescription: recipeDescription,
+        recipeinstructions: recipeInstructions,
+        isprivate: isPrivate,
+        userid: userId
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
   togglePrivacy(recipeId){
     return axios.post(
       API_URL + "/rpc/toggleprivate",
@@ -137,12 +139,65 @@ class Api {
     );
   }
 
+  // EQUIPMENT CALLS
 
-  // deleteArticle(id) {
-  //   return axios.delete(API_URL + `/articles?articleid=eq.${id}`, {
-  //     headers: authHeader(),
-  //   });
-  // }
+  getEquipment(){
+    return axios.get(
+      API_URL + `/equipment`,
+      {},
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  getRecipeEquipment(recipeId){
+    return axios.get(
+      API_URL + `/recipeequipment?recipeid=eq.${recipeId}`,
+      {},
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  createEquipment(name, description) {
+    return axios.post(
+      API_URL + `/equipment`,
+      {
+        equipmentname: name,
+        equipmentdescription: description,
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  addEquipmentToRecipe(equipmentId, recipeId){
+    return axios.post(API_URL + `/involves`, 
+    {
+      equipmentid: equipmentId,
+      recipeid: recipeId
+    },
+    {
+      headers: authHeader(),
+    });
+  }
+
+  removeEquipmentFromRecipe(equipmentId, recipeId){
+    return axios.delete(API_URL + `/involves?equipmentid=eq.${equipmentId}&recipeid=eq.${recipeId}`, 
+    {},
+    {
+      headers: authHeader(),
+    });
+  }
+
+
+  // INGREDIENT CALLS
+
+
+  // ADMINISTRATIVE CALLS
 
   login(email, password) {
     return axios.post(API_URL + "/rpc/login", { email, password });

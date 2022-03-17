@@ -3,60 +3,36 @@
     <div>
       <form name="form" @submit.prevent="handleCreate">
         <div class="form-group">
-          <label for="recipeName">Recipe Name</label>
+          <label for="equipmentName">Equipment Name *</label>
           <input
-            v-model="recipeName"
+            v-model="equipmentName"
             type="text"
             class="form-control"
-            name="recipeName"
+            name="equipmentName"
+            required
           />
         </div>
         <div class="form-group">
-          <label for="recipeInstructions">Recipe Instructions</label>
+          <label for="equipmentDescription">Equipment Description</label>
           <input
-            v-model="recipeInstructions"
+            v-model="equipmentDescription"
             type="text"
             class="form-control"
-            name="recipeInstructions"
+            name="equipmentDescription"
           />
         </div>
+
+        <template v-for="error in this.errors">
+          <b-alert show variant="danger" :key="error.id">{{error.message}}</b-alert>
+        </template>
+
         <div class="form-group">
-          <label for="recipeDescription">Recipe Description</label>
-          <input
-            v-model="recipeDescription"
-            type="text"
-            class="form-control"
-            name="recipeDescription"
-          />
-        </div>
-        <div class="form-group">
-          <label for="isPrivate">Privacy</label>
-          <br />
-          <input
-            v-model="isPrivate"
-            type="radio"
-            id="public"
-            value="Public"
-            name="isPrivate"
-          />
-          <label for="public">Public</label>
-          <br />
-          <input
-            v-model="isPrivate"
-            type="radio"
-            id="private"
-            value="Private"
-            name="isPrivate"
-          />
-          <label for="private">Private</label>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block" @click="handleCreate()" :disabled="loading">
+          <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
             ></span>
-            <span>Create and Add Recipe</span>
+            <span>Create and Add Equipment</span>
           </button>
         </div>
         <br>
@@ -68,28 +44,43 @@
 
 <script>
 import Api from "../api"
-import { getJwtToken, getUserIdFromToken } from '../auth';
 
 export default {
   name: "AddNewRecipe",
   props: {
+    existingEquipment: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    recipeId: function (){
+      return this.$route.params.recipeid
+    }
   },
   data: function () {
     return {
       loading: false,
-      isPrivate: Boolean,
       equipmentName: "",
       equipmentDescription: "",
-      recipeId: "",
-      userId: ""
+      errors: []
     };
   },
-  created: function () {
-    this.userId = getUserIdFromToken(getJwtToken())
-  },
   methods: {
-    handleCreate() {
-      Api.createRecipe(this.recipeName, this.recipeDescription, this.recipeInstructions, this.isPrivate, this.userId)
+    async handleCreate(e) {
+      this.isValid()
+      if (!this.errors.length) {
+        await Api.createEquipment(this.equipmentName, this.equipmentDescription)
+        this.$emit('equipmentCreated', this.equipmentName)
+      }
+      e.preventDefault()
+    },
+    isValid (){
+      const equipmentErrors = []
+      if (this.existingEquipment.find(item => item.equipmentname.toLowerCase() === this.equipmentName.toLowerCase())) {
+        equipmentErrors.push({id:'nameError', message: 'That equipment has already been added. Please go back and select it.'})
+      }
+      this.errors = [...equipmentErrors]
     }
   }
 };
