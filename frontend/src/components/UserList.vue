@@ -14,33 +14,34 @@
               <strong>{{user.userfirstname}} {{user.userlastname}}</strong>
               <br/> {{user.useremail}} | {{user.useremail}}
               <br/>
-                <span v-if="user.isadmin">
+                <span class="mt-2">
+                  <span v-if="user.isadmin">
+                    <b-btn
+                    class="mr-2"
+                      variant="primary"
+                      @click="toggleAdmin(user.userid)"
+                    >
+                      Remove Admin Status
+                    </b-btn>
+                  </span>
+                  <span v-else>
+                    <b-btn
+                    class="mr-2"
+                      outlined
+                      variant="outline-primary"
+                      @click="toggleAdmin(user.userid)"
+                    >
+                      Give Admin Status
+                    </b-btn>
+                  </span>
                   <b-btn
-                  class="mr-2"
-                    variant="primary"
-                    @click="toggleAdmin(user.userid)"
+                    class="mx-2"
+                    variant="danger"
+                    @click="deleteUser(user.userid)"
                   >
-                    Remove Admin Status
+                    Delete User
                   </b-btn>
                 </span>
-                <span v-else>
-                  <b-btn
-                  class="mr-2"
-                    outlined
-                    variant="outline-primary"
-                    @click="toggleAdmin(user.userid)"
-                  >
-                    Give Admin Status
-                  </b-btn>
-                </span>
-                <span>&nbsp;</span>
-                <b-btn
-                  class="mx-2"
-                  variant="danger"
-                  @click="deleteUser(user.userid)"
-                >
-                  Delete User
-                </b-btn>
             </b-card-text>
           </b-card>
           </b-list-item>

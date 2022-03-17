@@ -6,8 +6,7 @@
       header-bg-variant="secondary"
       header-text-variant="white"
     >
-      <div v-if="editting">
-        {{this.selected}}
+      <div v-if="editting && managingRecipe">
           <b-list-group flush>
             <b-form-group
               label="Select All Equipment Used:"
@@ -63,7 +62,6 @@ export default {
   computed: {
     options: function (){
       const optionsArray = this.allEquipment.map(item => {
-        console.log(item)
         return {
           text: item.equipmentname,
           value: item
@@ -84,14 +82,6 @@ export default {
         return 0;
       });
     },
-    // selected: {
-    //   get: function (){
-    //     return [...this.equipmentAdded]
-    //   },
-    //   set: function (value) {
-    //     this.equipmentAdded = [...value]
-    //   }
-    // },
     recipeId: function (){
       return this.$route.params.recipeid
     }
@@ -101,14 +91,13 @@ export default {
       loading: false,
       editting: false,
       allEquipment: [],
-      equipmentAdded: [],
       recipeEquipment: [],
       selected: []
     };
   },
   created: function () {
-    this.getEquipmentInfo().then(() => {
-      this.equipmentAdded = [...this.recipeEquipment]
+    this.getEquipmentInfo().then(res => {
+      console.log('should be true: ', res)
       this.selected = [...this.recipeEquipment]
     })
   },
@@ -122,57 +111,67 @@ export default {
     cancel(){
       this.toggleEdit()
     },
-    async getEquipmentList(){
-      const res = await Api.getEquipment()
-      this.allEquipment = [...res.data]
+    getEquipmentList(){
+      return new Promise((resolve, reject) => {
+          Api.getEquipment().then(res => {
+            this.allEquipment = [...res.data]
+            resolve(true)
+          }).catch(e => {
+            console.error('Problem getting equipment list: ', e)
+            reject(false)
+          })
+      })
     },
-    async getEquipmentInfo(){
-      const equipmentRes = await Api.getRecipeEquipment(this.recipeId)
-      this.recipeEquipment = [...equipmentRes.data]
+    getEquipmentInfo(){
+      return new Promise((resolve, reject) => {
+          Api.getRecipeEquipment(this.recipeId).then(res => {
+            this.recipeEquipment = [...res.data]
+            resolve(true)
+          }).catch(e => {
+            console.error('Problem getting equipment info: ', e)
+            reject(false)
+          })
+      })
     },
-    async handleEquipmentCreated(event){
+    handleEquipmentCreated(event){
       // update the list
-      await this.getEquipmentList()
-      console.log(event)
-      // TODO: select the equipment added
-      // const addedItem = this.options.find(item => item.text === event)
-      // if (addedItem) {
-      //   this.selected = [...this.equipmentAdded, addedItem]
-      //   console.log('selected after: ', this.selected)
-      // }
-      // else console.error('Item was not found and could not be added', event)
+      this.getEquipmentList().then(() => {
+        // TODO: select the equipment added
+      const addedItem = this.options.find(item => item.text === event)
+      if (addedItem) {
+        this.selected = [...this.selected, addedItem]
+        console.log('selected after: ', this.selected)
+      }
+      else console.error('Item was not found and could not be added', event)
+      })
     },
     handleSave(){
       this.saveEquipment()
       this.removeEquipment()
-      this.getEquipmentList()
+      // WAIT
+      this.getEquipmentInfo()
       this.toggleEdit()
     },
     saveEquipment(){
-      const equipmentToSave = this.equipmentAdded.filter(addedItem => {
-        if (this.recipeEquipment.find(recipeItem => addedItem.equipmentid === recipeItem.equipmentid)) {
-          console.info('do not add ', addedItem.equipmentname)
-        } else {
-          return addedItem
-        }
-      })
+      console.log(this.selected)
+      const equipmentToSave = this.selected.filter(addedItem => { if (!this.recipeEquipment.includes(addedItem)) return addedItem})
       console.info('adding: ', equipmentToSave)
-      equipmentToSave.forEach(item => {
-        Api.addEquipmentToRecipe(item.equipmentid, this.recipeId)
-      });
+      for (const item of equipmentToSave) {
+        Api.addEquipmentToRecipe(item.equipmentid, this.recipeId).then(() => {
+          console.log('successfully added ', item.equipmentname)
+        })
+      }
+      return true
     },
     removeEquipment(){
-      const equipmentToRemove = this.recipeEquipment.filter(recipeItem => {
-        if (this.equipmentAdded.find(addedItem => addedItem.equipmentid === recipeItem.equipmentid)) {
-          console.info('do not remove ', recipeItem.equipmentname)
-        } else {
-          return recipeItem
-        }
-      })
+      const equipmentToRemove = this.recipeEquipment.filter(recipeItem => { if (!this.selected.includes(recipeItem)) return recipeItem })
       console.info('removing: ', equipmentToRemove)
-      equipmentToRemove.forEach(item => {
-        Api.removeEquipmentFromRecipe(item.equipmentid, this.recipeId)
-      });
+      for (const item of equipmentToRemove) {
+        Api.removeEquipmentFromRecipe(item.equipmentid, this.recipeId).then(() => {
+          console.log('successfully added ', item.equipmentname)
+        })
+      }
+      return true
     }
   }
 };

@@ -192,9 +192,46 @@ class Api {
     });
   }
 
-
   // INGREDIENT CALLS
 
+  getIngredients(){
+    return axios.get(
+      API_URL + `/ingredient`,
+      {},
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  getRecipeIngredients(recipeId) {
+    return axios.get(API_URL + `/recipeingredients?recipeid=eq.${recipeId}`,
+    {},
+    {
+      headers: authHeader(),
+    })
+  }
+
+  createIngredient(amount, measurement, itemId, recipeId) {
+    return axios.post(API_URL + `/ingredient`,
+    {
+      ingredientAmount: amount,
+      ingredientMeasurement: measurement,
+      itemid: itemId,
+      recipeId: recipeId
+    },
+    {
+      headers: authHeader(),
+    })
+  }
+
+  deleteIngredient(ingredientId) {
+    return axios.delete(API_URL + `/ingredient?ingredientid=eq.${ingredientId}`,
+    {},
+    {
+      headers: authHeader(),
+    })
+  }
 
   // ADMINISTRATIVE CALLS
 

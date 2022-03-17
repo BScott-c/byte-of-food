@@ -1,13 +1,20 @@
 <template>
   <div>
     <div>
-      <router-link :to="`/cookbook/${this.$route.params.cookbookid}`" >« Back to Cookbook</router-link>
-
-      <h1>{{recipe.recipename}}</h1>
-      <h3>{{recipe.recipedescription}}</h3>
-      <b-button v-if="this.canEdit" @click="toggleManage" title="Manage Recipe" :class="buttonClass">
-                  <b-icon icon="pencil-square" variant="light" aria-hidden="true"></b-icon> Manage
-              </b-button>
+      <b-container class="bv-example-row mb-3">
+        <router-link :to="`/cookbook/${this.$route.params.cookbookid}`" >« Back to Cookbook</router-link>
+        <h1>{{recipe.recipename}}</h1>
+        <b-row>
+          <b-col class="text-left"><h3>{{recipe.recipedescription}}</h3></b-col>
+          <b-col class="text-right">
+            <b-button v-if="this.canEdit" @click="toggleManage" title="Manage Recipe" :class="buttonClass">
+                <b-icon icon="pencil-square" variant="light" aria-hidden="true"></b-icon> Manage
+            </b-button>
+          </b-col>
+        </b-row>
+      </b-container>
+      
+      
                 
       <b-container class="bv-example-row mb-3">
         <b-row>
@@ -15,7 +22,7 @@
             <RecipeInstructions :managingRecipe="managing" :instructions="recipe.recipeinstructions" :canEdit="canEdit" v-if="recipe.recipeinstructions || recipe.recipeinstructions === ''"/>
             </b-col>
           <b-col>
-            <Equipment @equipmentSaved="reloadEquipment" :managingRecipe="managing" :recipeEquipment="equipment" :canEdit="canEdit" v-if="equipment || !equipment.length"/>
+            <Equipment @equipmentSaved="reloadEquipment" :managingRecipe="managing" :canEdit="canEdit"/>
           </b-col>
         </b-row>
       </b-container>

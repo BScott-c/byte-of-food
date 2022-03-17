@@ -37,13 +37,8 @@
 import Api from "../api"
 
 export default {
-  name: "RecipeInstructions",
+  name: "Ingredients",
   props: {
-    instructions: {
-      type: String,
-      required: true,
-      default: ""
-    },
     managingRecipe: {
       type: Boolean,
       required: true
