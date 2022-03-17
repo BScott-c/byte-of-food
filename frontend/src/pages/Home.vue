@@ -1,15 +1,15 @@
 <template>
-  <b-container>
+  <b-container class="mt-2 mx-4">
     <b-row>
       <b-col>
-        <b-container class="mx-auto h-50 text-center">
+        <b-container class="text-center">
         <h1>Your Cookbooks!</h1>
         </b-container>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-container class="mx-auto mb-1" align-v="center">
+        <b-container class="mb-2" align-v="center">
         <b-button pill variant="primary" @click="goToCreateCookbook()">Create Cookbook</b-button>
         </b-container>
         <div v-if="loading">Loading cookbooks....</div>

@@ -13,10 +13,10 @@
 
     <b-collapse id="navbar-toggle-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item to="/">Cookbooks</b-nav-item>
-        <b-nav-item to="/">Favorite Recipes</b-nav-item>
-        <b-button variant="warning" to="/Admin" v-if="AdminStatus">Admin Page</b-button>
-        <b-button class="mt-2" variant="danger" to="/Logout">Logout</b-button>
+        <b-nav-item class="mx-auto" to="/">Cookbooks</b-nav-item>
+        <b-nav-item class="mx-auto" to="/">Favorite Recipes</b-nav-item>
+        <b-button class="mt-2 mx-5" variant="warning" to="/Admin" v-if="AdminStatus">Admin Page</b-button>
+        <b-button class="mt-4 mb-2 mx-5" variant="danger" to="/Logout">Logout</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
