@@ -7,9 +7,6 @@
       header-text-variant="white"
     >
       <div v-if="editting && managingRecipe">
-        {{this.options}}
-        <br/><br/>
-        {{this.selected}}
           <b-list-group flush>
             <b-form-group
               label="Select All Equipment Used:"
@@ -198,9 +195,7 @@ export default {
       }, 500);
     },
     saveEquipment(){
-      console.log('saving: ', this.selected)
       const equipmentToSave = this.selected.filter(addedItem => { if (!this.recipeEquipment.includes(addedItem)) return addedItem})
-      console.log('adding: ', equipmentToSave)
       for (const item of equipmentToSave) {
         Api.addEquipmentToRecipe(item.equipmentid, this.recipeId).then(() => {
           console.log('successfully added ', item.equipmentname)
@@ -209,10 +204,7 @@ export default {
       return Promise.resolve(true)
     },
     removeEquipment(){
-      console.log('4')
-      console.log('here; ', this.selected)
       const equipmentToRemove = this.recipeEquipment.filter(recipeItem => { if (!this.selected.includes(recipeItem)) return recipeItem })
-      console.log('removing: ', equipmentToRemove)
       for (const item of equipmentToRemove) {
         Api.removeEquipmentFromRecipe(item.equipmentid, this.recipeId).then(() => {
           console.log('successfully removed ', item.equipmentname)
