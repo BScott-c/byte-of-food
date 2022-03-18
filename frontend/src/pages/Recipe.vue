@@ -2,7 +2,7 @@
   <div>
     <div>
       <b-container class="bv-example-row mb-3">
-        <router-link :to="`/cookbook/${this.$route.params.cookbookid}`" >« Back to Cookbook</router-link>
+        <!-- <router-link :to="`/cookbook/${this.$route.params.cookbookid}`" >« Back to Cookbook</router-link> -->
         <h1>{{recipe.recipename}}</h1>
         <b-row>
           <b-col class="text-left"><h3>{{recipe.recipedescription}}</h3></b-col>

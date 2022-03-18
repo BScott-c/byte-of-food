@@ -7,6 +7,9 @@
       header-text-variant="white"
     >
       <div v-if="editting && managingRecipe">
+        {{this.options}}
+        <br/><br/>
+        {{this.selected}}
           <b-list-group flush>
             <b-form-group
               label="Select All Equipment Used:"
@@ -24,19 +27,35 @@
             <br />
             <div>
               <p>Don't see what you need?</p>
-              <b-button v-b-modal.equipment-modal>Add an item</b-button>
+              <b-button v-b-modal.equipment-modal>Add an Item</b-button>
             </div>
+            <br /><br />
 
             <b-modal id="equipment-modal" title="Add Equipment">
               <AddEquipment :existingEquipment="allEquipment" v-on:equipmentCreated="handleEquipmentCreated($event)"/>
             </b-modal>
 
+            <span
+              v-show="loading"
+              class="spinner-border spinner-border-sm"
+            ></span>
+
           </b-list-group>
-          <b-button @click="cancel" variant="danger">Cancel</b-button> <b-button @click="handleSave" variant="success">Save</b-button> 
+        <div>
+            <b-button @click="cancel" class="ml-2" variant="danger">Cancel</b-button>
+            <b-button @click="handleSave" class="ml-2" variant="success">Save</b-button> 
+            <span
+              v-show="loading"
+              class="spinner-border spinner-border-sm"
+            ></span>
+        </div>
+      
+
+           
       </div>
       <div v-else>
         <b-list-group flush>
-          <b-list-group-item v-for="item of this.recipeEquipment" :key="item.equipmentname">{{item.equipmentname}}</b-list-group-item>
+          <b-list-group-item v-for="item of this.alphabetizedRecipeEquipment" :key="item.equipmentname">{{item.equipmentname}}</b-list-group-item>
         </b-list-group>
         <b-button v-if="this.managingRecipe" @click="toggleEdit" variant="info">Edit</b-button>
       </div>
@@ -64,7 +83,10 @@ export default {
       const optionsArray = this.allEquipment.map(item => {
         return {
           text: item.equipmentname,
-          value: item
+          value: {
+            recipeid: this.$route.params.recipeid,
+            ...item
+          }
         }
       })
 
@@ -72,6 +94,22 @@ export default {
       return optionsArray.sort(function(a, b) {
         const nameA = a.text.toUpperCase(); // ignore upper and lowercase
         const nameB = b.text.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    },
+    alphabetizedRecipeEquipment: function () {
+      //sort array by text
+      const copyOfRecipeEquipment = [...this.recipeEquipment]
+      return copyOfRecipeEquipment.sort(function(a, b) {
+        const nameA = a.equipmentname.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.equipmentname.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -96,8 +134,7 @@ export default {
     };
   },
   created: function () {
-    this.getEquipmentInfo().then(res => {
-      console.log('should be true: ', res)
+    this.getEquipmentInfo().then(() => {
       this.selected = [...this.recipeEquipment]
     })
   },
@@ -135,43 +172,53 @@ export default {
     },
     handleEquipmentCreated(event){
       // update the list
-      this.getEquipmentList().then(() => {
+      this.getEquipmentList()
+      console.log(event)
+      /*
+      .then(() => {
         // TODO: select the equipment added
+        
       const addedItem = this.options.find(item => item.text === event)
       if (addedItem) {
         this.selected = [...this.selected, addedItem]
-        console.log('selected after: ', this.selected)
       }
       else console.error('Item was not found and could not be added', event)
       })
+      */
     },
-    handleSave(){
-      this.saveEquipment()
-      this.removeEquipment()
+    async handleSave(){
+      this.loading = true
+      await this.saveEquipment()
+      await this.removeEquipment()
       // WAIT
-      this.getEquipmentInfo()
-      this.toggleEdit()
+      setTimeout(() => {
+        this.getEquipmentInfo()
+        this.toggleEdit()
+        this.loading = false
+      }, 500);
     },
     saveEquipment(){
-      console.log(this.selected)
+      console.log('saving: ', this.selected)
       const equipmentToSave = this.selected.filter(addedItem => { if (!this.recipeEquipment.includes(addedItem)) return addedItem})
-      console.info('adding: ', equipmentToSave)
+      console.log('adding: ', equipmentToSave)
       for (const item of equipmentToSave) {
         Api.addEquipmentToRecipe(item.equipmentid, this.recipeId).then(() => {
           console.log('successfully added ', item.equipmentname)
         })
       }
-      return true
+      return Promise.resolve(true)
     },
     removeEquipment(){
+      console.log('4')
+      console.log('here; ', this.selected)
       const equipmentToRemove = this.recipeEquipment.filter(recipeItem => { if (!this.selected.includes(recipeItem)) return recipeItem })
-      console.info('removing: ', equipmentToRemove)
+      console.log('removing: ', equipmentToRemove)
       for (const item of equipmentToRemove) {
         Api.removeEquipmentFromRecipe(item.equipmentid, this.recipeId).then(() => {
-          console.log('successfully added ', item.equipmentname)
+          console.log('successfully removed ', item.equipmentname)
         })
       }
-      return true
+      return Promise.resolve(true)
     }
   }
 };
