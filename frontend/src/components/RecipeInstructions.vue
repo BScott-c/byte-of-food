@@ -21,7 +21,7 @@
             </b-form-group>
           </b-list-group>
           <br/>
-          <b-button @click="cancel" variant="danger">Cancel</b-button> <b-button @click="modifyInstructions" variant="success">Save</b-button> 
+          <b-button @click="cancel" class="ml-2" variant="danger">Cancel</b-button> <b-button @click="modifyInstructions" class="ml-2" variant="success">Save</b-button> 
       </div>
       <div v-else>
         <b-list-group flush>

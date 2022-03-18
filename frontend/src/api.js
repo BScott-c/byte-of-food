@@ -233,6 +233,28 @@ class Api {
     })
   }
 
+  // ITEM CALLS
+
+  getAllItems(){
+    return axios.get(
+      API_URL + `/item`,
+      {},
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  createItem(itemName) {
+    return axios.post(API_URL + `/item`,
+    {
+      itemname: itemName
+    },
+    {
+      headers: authHeader(),
+    })
+  }
+
   // ADMINISTRATIVE CALLS
 
   login(email, password) {

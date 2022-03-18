@@ -16,7 +16,7 @@ SELECT i.recipeid, e.equipmentname, e.equipmentdescription, e.equipmentid from e
 FULL JOIN involves as i on e.equipmentid = i.equipmentid;
 -- Get Recipe Ingredients where ing.recipeid = '3'
 CREATE OR REPLACE VIEW RecipeIngredients AS
-SELECT ing.recipeid, item.itemname, ing.ingredientamount, ing.ingredientmeasurement from ingredient as ing
+SELECT ing.recipeid, item.itemname, ing.ingredientamount, ing.ingredientmeasurement, item.itemid from ingredient as ing
 FULL JOIN item on ing.itemid = item.itemid;
 -- Get Favorited Recipes where f.userid = '2'
 CREATE OR REPLACE VIEW FavoriteRecipes AS

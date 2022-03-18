@@ -19,7 +19,7 @@
       <b-container class="bv-example-row mb-3">
         <b-row>
           <b-col>
-            <RecipeInstructions :managingRecipe="managing" :instructions="recipe.recipeinstructions" :canEdit="canEdit" v-if="recipe.recipeinstructions || recipe.recipeinstructions === ''"/>
+            <Ingredients :managingRecipe="managing" :canEdit="canEdit" />
             </b-col>
           <b-col>
             <Equipment @equipmentSaved="reloadEquipment" :managingRecipe="managing" :canEdit="canEdit"/>
@@ -42,13 +42,15 @@
 import Api from "../api";
 import RecipeInstructions from "../components/RecipeInstructions.vue"
 import Equipment from "../components/Equipment.vue"
+import Ingredients from "../components/Ingredients.vue"
 import { getJwtToken, getUserIdFromToken } from '../auth';
 
 export default {
   name: "Recipe",
   components: {
     RecipeInstructions,
-    Equipment
+    Equipment,
+    Ingredients
   },
   computed: {
     buttonClass: function () {
