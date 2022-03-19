@@ -215,10 +215,10 @@ class Api {
   createIngredient(amount, measurement, itemId, recipeId) {
     return axios.post(API_URL + `/ingredient`,
     {
-      ingredientAmount: amount,
-      ingredientMeasurement: measurement,
+      ingredientamount: amount,
+      ingredientmeasurement: measurement,
       itemid: itemId,
-      recipeId: recipeId
+      recipeid: recipeId
     },
     {
       headers: authHeader(),

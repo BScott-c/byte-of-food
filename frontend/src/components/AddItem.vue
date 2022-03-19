@@ -53,13 +53,8 @@ export default {
       this.isValid()
       if (!this.errors.length) {
         await Api.createItem(this.itemName)
-        this.getAllItems().then(() => {
-          const resData = {
-            addedItem: this.itemName,
-            allItems: this.existingItems
-          }
-            this.$emit('itemCreated', resData)
-        })
+        this.getAllItems()
+        this.$emit('itemCreated')
       }
       e.preventDefault()
     },
