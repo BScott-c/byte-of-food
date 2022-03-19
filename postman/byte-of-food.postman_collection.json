@@ -749,6 +749,132 @@
 			]
 		},
 		{
+			"name": "Holds",
+			"item": [
+				{
+					"name": "Get cookbook recipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/holds",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"holds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Ingredient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/ingredient?ingredientid=eq.{{Ingredient_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "ingredientid",
+									"value": "eq.{{Ingredient_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Ingredient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cookbookid\": {{recipe_id}},\n    \"recipeid\": {{recipe_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/holds",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"holds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Ingredient",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredientAmount\": 24\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/ingredient?ingredientid=eq.{{Ingredient_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "ingredientid",
+									"value": "eq.{{Ingredient_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ingredient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/ingredient?ingredientid=eq.{{ingredient_id}}",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "ingredientid",
+									"value": "eq.{{ingredient_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Views",
 			"item": [
 				{
@@ -886,6 +1012,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "SingleUserAdminStatus",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{context}}/adminstatus?userid=eq.9",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"adminstatus"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "eq.9"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -914,6 +1066,33 @@
 							"path": [
 								"rpc",
 								"toggleadmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recipes Not IN Cookbooks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{cookbook_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{context}}/rpc/recipestoaddtocookbook",
+							"host": [
+								"{{context}}"
+							],
+							"path": [
+								"rpc",
+								"recipestoaddtocookbook"
 							]
 						}
 					},
@@ -953,7 +1132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"test456@test.com\",\n    \"password\": \"pleasework\",\n    \"firstname\": \"John\",\n    \"lastname\": \"Doe\"\n}",
+							"raw": "{\n    \"email\": \"test6@test.com\",\n    \"firstname\": \"Janie\",\n    \"lastname\": \"Doe\",\n    \"password\": \"thisShouldHashAsWell\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -980,7 +1159,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"firstUser@test.com\",\n    \"password\": \"strongpassword\"\n}",
+							"raw": "{\n    \"email\": {{user_email}},\n    \"password\": {{user_password}}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
