@@ -14,9 +14,6 @@ import CreateCookbook from "./pages/CreateCookbook"
 import Recipe from './pages/Recipe.vue'
 import AddRecipeToCookbook from "./pages/AddRecipeToCookbook"
 import AppBar from "./components/AppBar.vue"
-import AdminArticleAdd from "./components/AdminArticleAdd";
-import AdminArticleList from "./components/AdminArticleList";
-import AdminArticleEdit from "./components/AdminArticleEdit";
 
 import DefaultLayout from './layouts/Default.vue';
 import PlainLayout from './layouts/Plain.vue';
@@ -99,9 +96,6 @@ const router = new VueRouter({
       path: "/admin",
       component: Admin,
       children: [
-        { path: "add", component: AdminArticleAdd },
-        { path: "edit/:id", component: AdminArticleEdit },
-        { path: "", component: AdminArticleList },
         { path: "", component: AppBar}
       ],
     },
