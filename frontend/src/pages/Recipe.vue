@@ -3,9 +3,13 @@
     <div>
       <b-container class="bv-example-row mb-3">
         <!-- <router-link :to="`/cookbook/${this.$route.params.cookbookid}`" >« Back to Cookbook</router-link> -->
-        <h1>{{recipe.recipename}}</h1>
+        <h1 v-if="!this.managing">{{recipe.recipename}}</h1>
+        <b-form-input v-else v-model="recipe.recipename" :value="recipe.recipename" @change="toggleChange('name')"></b-form-input>
         <b-row>
-          <b-col class="text-left"><h3>{{recipe.recipedescription}}</h3></b-col>
+          <b-col class="text-left">
+            <h3 v-if="!this.managing">{{recipe.recipedescription}}</h3>
+            <b-form-input v-else v-model="recipe.recipedescription" :value="recipe.recipedescription" @change="(toggleChange('description'))"></b-form-input>
+            </b-col>
           <b-col class="text-right">
             <b-button v-if="this.canEdit" @click="toggleManage" title="Manage Recipe" :class="buttonClass">
                 <b-icon icon="pencil-square" variant="light" aria-hidden="true"></b-icon> Manage
@@ -14,8 +18,6 @@
         </b-row>
       </b-container>
       
-      
-                
       <b-container class="bv-example-row mb-3">
         <b-row>
           <b-col>
@@ -64,7 +66,10 @@ export default {
       canEdit: false,
       managing: false,
       recipe: {},
-      equipment: []
+      equipment: [],
+      recipeNameChanged: false,
+      recipeDescriptionChanged: false,
+      recipeId: this.$route.params.recipeid
     };
   },
   created: async function () {
@@ -81,6 +86,16 @@ export default {
       if (this.canEdit){
         this.managing = !this.managing
       }
+      if (this.recipeNameChanged || this.recipeDescriptionChanged){
+        const body = {}
+        if (this.recipeDescriptionChanged) body.recipedescription = this.recipe.recipedescription
+        if (this.recipeNameChanged) body.recipename = this.recipe.recipename
+        Api.updateRecipe(this.recipeId, body)
+      }
+    },
+    toggleChange (type){
+      if (type === 'name') this.recipeNameChanged = !this.recipeNameChanged
+      else this.recipeDescriptionChanged = !this.recipeDescriptionChanged
     },
     async getRecipeInfo(userId){
       const recipeRes = await Api.getRecipe([{dbparam: 'recipeid', value: this.$route.params.recipeid}])

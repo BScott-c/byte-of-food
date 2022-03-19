@@ -12,7 +12,7 @@
           <label for="email">Email</label>
           <input
             v-model="email"
-            type="text"
+            type="email"
             class="form-control"
             name="email"
             required

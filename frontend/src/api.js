@@ -100,7 +100,8 @@ class Api {
     return axios.get(API_URL + query)
   }
 
-  updateRecipe(recipeid, body){ // Syntax of filter parameter: [{dbparam: 'userid', value: '12345'}]
+  updateRecipe(recipeid, body){ 
+    console.log(recipeid)
     return axios.patch(
       API_URL + `/recipe?recipeid=eq.${recipeid}`,
       body,

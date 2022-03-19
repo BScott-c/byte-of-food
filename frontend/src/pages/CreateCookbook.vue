@@ -7,7 +7,7 @@
     <b-form @submit="handleCreate" @reset="onReset">
       <b-form-group
         id="input-group-1"
-        label="CookBook Name:"
+        label="Cookbook Name:"
         label-for="input-1"
       >
         <b-form-input
@@ -34,7 +34,7 @@
       <span>&nbsp;</span>
       <b-button pill type="reset" variant="danger">Reset</b-button>
     </b-form>
-    <b-link to="/" class="card-link"> Return back to cookbooks </b-link>
+    <b-link to="/" class="card-link"> Return to cookbooks </b-link>
   </b-card>
   <!-- <div class="card card-container">
       <h1>Create a Cookbook</h1>
